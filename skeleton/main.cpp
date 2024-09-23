@@ -30,6 +30,18 @@ PxDefaultCpuDispatcher*	gDispatcher = NULL;
 PxScene*				gScene      = NULL;
 ContactReportCallback gContactReportCallback;
 
+RenderItem* sphere;
+PxTransform* sphereTr;
+float sphereRadius = 5;
+
+float axisLength = 20;
+float axisSize = 2;
+RenderItem* xAxis;
+PxTransform* xAxisTr;
+RenderItem* yAxis;
+PxTransform* yAxisTr;
+RenderItem* zAxis;
+PxTransform* zAxisTr;
 
 // Initialize physics engine
 void initPhysics(bool interactive)
@@ -54,6 +66,28 @@ void initPhysics(bool interactive)
 	sceneDesc.filterShader = contactReportFilterShader;
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
+
+
+	// PRACTICA 1
+
+	sphereTr = new PxTransform({ 0,0,0 });
+	sphere = new RenderItem(CreateShape(PxSphereGeometry(sphereRadius)), sphereTr, Vector4(1, 1, 1, 1));
+
+	// ejes 
+	xAxisTr = new PxTransform({ axisLength,0,0 });
+	xAxis = new RenderItem(CreateShape(PxSphereGeometry(axisSize)), xAxisTr, Vector4(1, 0, 0, 1));
+
+	yAxisTr = new PxTransform({ 0,axisLength,0 });
+	yAxis = new RenderItem(CreateShape(PxSphereGeometry(axisSize)), yAxisTr, Vector4(0, 1, 0, 1));
+
+	zAxisTr = new PxTransform({ 0,0,axisLength });
+	zAxis = new RenderItem(CreateShape(PxSphereGeometry(axisSize)), zAxisTr, Vector4(0, 0, 1, 1));
+
+
+	RegisterRenderItem(sphere);
+	RegisterRenderItem(xAxis);
+	RegisterRenderItem(yAxis);
+	RegisterRenderItem(zAxis);
 	}
 
 
@@ -77,6 +111,12 @@ void cleanupPhysics(bool interactive)
 	// Rigid Body ++++++++++++++++++++++++++++++++++++++++++
 	gScene->release();
 	gDispatcher->release();
+
+	DeregisterRenderItem(sphere);
+	DeregisterRenderItem(xAxis);
+	DeregisterRenderItem(yAxis);
+	DeregisterRenderItem(zAxis);
+
 	// -----------------------------------------------------
 	gPhysics->release();	
 	PxPvdTransport* transport = gPvd->getTransport();
