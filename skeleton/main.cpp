@@ -81,7 +81,7 @@ void initPhysics(bool interactive)
 	zAxisTr = new PxTransform({ 0,0,axisLength });
 	zAxis = new RenderItem(CreateShape(PxSphereGeometry(axisSize)), zAxisTr, Vector4(0, 0, 1, 1));
 
-	p1 = new Particle({ 0,0,0 }, {1,0,0});
+	p1 = new Particle({ 0,0,0 }, { 1,0,0 }, {1,0,0});
 
 	RegisterRenderItem(xAxis);
 	RegisterRenderItem(yAxis);
