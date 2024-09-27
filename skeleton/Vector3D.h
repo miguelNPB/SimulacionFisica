@@ -1,21 +1,21 @@
 #pragma once
 
-class Vector3D
+class Vector3
 {
 public:
 	float x, y, z;
 
-	Vector3D(float x = 0, float y = 0, float z = 0) :
+	Vector3(float x = 0, float y = 0, float z = 0) :
 		x(x), y(y), z(z) {};
 
 	float magnitude();
-	Vector3D normalize();
-	Vector3D productScalar(const Vector3D& other);
+	Vector3 normalize();
+	Vector3 productScalar(const Vector3& other);
 
-	Vector3D operator+(const Vector3D& other);
-	Vector3D operator-(const Vector3D& other);
+	Vector3 operator+(const Vector3& other);
+	Vector3 operator-(const Vector3& other);
 	// multiplicar por escalar
-	Vector3D operator*(float k);
+	Vector3 operator*(float k);
 	// multiplicar con otro vector
-	Vector3D operator*(const Vector3D& other);
+	Vector3 operator*(const Vector3& other);
 };

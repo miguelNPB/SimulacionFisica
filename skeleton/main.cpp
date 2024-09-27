@@ -10,6 +10,8 @@
 
 #include <iostream>
 
+#include "Particle.h"
+
 std::string display_text = "This is a test";
 
 
@@ -30,10 +32,7 @@ PxDefaultCpuDispatcher*	gDispatcher = NULL;
 PxScene*				gScene      = NULL;
 ContactReportCallback gContactReportCallback;
 
-RenderItem* sphere;
-PxTransform* sphereTr;
-float sphereRadius = 5;
-
+/// /// /// 
 float axisLength = 20;
 float axisSize = 2;
 RenderItem* xAxis;
@@ -42,6 +41,8 @@ RenderItem* yAxis;
 PxTransform* yAxisTr;
 RenderItem* zAxis;
 PxTransform* zAxisTr;
+
+Particle* p1;
 
 // Initialize physics engine
 void initPhysics(bool interactive)
@@ -70,9 +71,6 @@ void initPhysics(bool interactive)
 
 	// PRACTICA 1
 
-	sphereTr = new PxTransform({ 0,0,0 });
-	sphere = new RenderItem(CreateShape(PxSphereGeometry(sphereRadius)), sphereTr, Vector4(1, 1, 1, 1));
-
 	// ejes 
 	xAxisTr = new PxTransform({ axisLength,0,0 });
 	xAxis = new RenderItem(CreateShape(PxSphereGeometry(axisSize)), xAxisTr, Vector4(1, 0, 0, 1));
@@ -83,8 +81,8 @@ void initPhysics(bool interactive)
 	zAxisTr = new PxTransform({ 0,0,axisLength });
 	zAxis = new RenderItem(CreateShape(PxSphereGeometry(axisSize)), zAxisTr, Vector4(0, 0, 1, 1));
 
+	p1 = new Particle({ 0,0,0 }, {1,0,0});
 
-	RegisterRenderItem(sphere);
 	RegisterRenderItem(xAxis);
 	RegisterRenderItem(yAxis);
 	RegisterRenderItem(zAxis);
@@ -97,6 +95,8 @@ void initPhysics(bool interactive)
 void stepPhysics(bool interactive, double t)
 {
 	PX_UNUSED(interactive);
+
+	p1->integrate(t);
 
 	gScene->simulate(t);
 	gScene->fetchResults(true);
@@ -112,7 +112,8 @@ void cleanupPhysics(bool interactive)
 	gScene->release();
 	gDispatcher->release();
 
-	DeregisterRenderItem(sphere);
+	delete p1;
+
 	DeregisterRenderItem(xAxis);
 	DeregisterRenderItem(yAxis);
 	DeregisterRenderItem(zAxis);
