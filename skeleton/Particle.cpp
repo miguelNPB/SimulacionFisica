@@ -16,5 +16,5 @@ Particle::~Particle() {
 void Particle::integrate(double t)
 {
 	pose.p = pose.p + vel * t;
-	vel = vel + acc * t;
+	vel = (vel + acc * t) * damping;
 }

@@ -20,5 +20,7 @@ private:
 
 	float size = 1;
 	Vector4 color;
+
+	double damping = 0.999;
 };
 
