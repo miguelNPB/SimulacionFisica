@@ -1,10 +1,10 @@
 #include "Particle.h"
 
-Particle::Particle(Vector3 Pos, Vector3 Vel, Vector3 Acc) {
-	vel = Vel;
+Particle::Particle(Vector3 Pos, Vector3 Vel, float size, Vector4 color) {
 	pose = PxTransform(Pos);
 
-	acc = Acc;
+	vel = Vel;
+	acc = Vector3(0, 0, 0);
 
 	renderItem = new RenderItem(CreateShape(PxSphereGeometry(size)), &pose, color);
 }
@@ -15,6 +15,11 @@ Particle::~Particle() {
 
 void Particle::integrate(double t)
 {
-	pose.p = pose.p + vel * t;
-	vel = (vel + acc * t) * damping;
+	// damping
+	vel = vel * std::pow(damping, t); 
+
+	// acceleration
+	vel = vel + acc * t;
+
+	pose.p += (vel * t);
 }

@@ -7,20 +7,24 @@ using namespace physx;
 class Particle
 {
 public:
-	Particle(Vector3 Pos, Vector3 Vel, Vector3 Acc);
+	Particle(Vector3 Pos, Vector3 Vel, 
+		float size = 1, Vector4 color = Vector4(1,1,1,1));
 	~Particle();
 
 	void integrate(double t);
-private:
-	Vector3 vel;
+
+	void setAcceleration(Vector3 newAcc) { acc = newAcc; }
+	Vector3 getAcceleration() { return acc; }
+
+	void setDamping(float newDamp) { damping = newDamp; }
+	float getDamping() { return damping; }
+protected:
 	physx::PxTransform pose;
 	RenderItem* renderItem;
 
+	Vector3 vel;
 	Vector3 acc;
 
-	float size = 1;
-	Vector4 color;
-
-	double damping = 0.999;
+	double damping = 1;
 };
 

@@ -11,6 +11,7 @@
 #include <iostream>
 
 #include "Particle.h"
+#include "Proyectile.h"
 
 std::string display_text = "This is a test";
 
@@ -42,7 +43,7 @@ PxTransform* yAxisTr;
 RenderItem* zAxis;
 PxTransform* zAxisTr;
 
-Particle* p1;
+Proyectile* p1;
 
 // Initialize physics engine
 void initPhysics(bool interactive)
@@ -81,7 +82,8 @@ void initPhysics(bool interactive)
 	zAxisTr = new PxTransform({ 0,0,axisLength });
 	zAxis = new RenderItem(CreateShape(PxSphereGeometry(axisSize)), zAxisTr, Vector4(0, 0, 1, 1));
 
-	p1 = new Particle({ 0,0,0 }, { 10,0,0 }, {0,0,0});
+	//p1 = new Particle({ 0,0,0 }, { 10,0,0 }, 1, {1,0,0,1});
+	p1 = new Proyectile({ 0,0,0 }, { 10,0,0 }, 1, 1, { 1,0,0,1 });
 
 	RegisterRenderItem(xAxis);
 	RegisterRenderItem(yAxis);
