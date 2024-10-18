@@ -28,6 +28,7 @@
     <ClInclude Include="Particle.h" />
     <ClInclude Include="Proyectile.h" />
     <ClInclude Include="constants.h" />
+    <ClInclude Include="ProyectilePool.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

@@ -12,6 +12,7 @@
 
 #include "Particle.h"
 #include "Proyectile.h"
+#include "ProyectilePool.h"
 
 std::string display_text = "This is a test";
 
@@ -43,7 +44,12 @@ PxTransform* yAxisTr;
 RenderItem* zAxis;
 PxTransform* zAxisTr;
 
+RenderItem* ground;
+PxTransform* groundTr;
+
 Proyectile* p1;
+
+ProyectilePool* pool;
 
 // Initialize physics engine
 void initPhysics(bool interactive)
@@ -82,12 +88,19 @@ void initPhysics(bool interactive)
 	zAxisTr = new PxTransform({ 0,0,axisLength });
 	zAxis = new RenderItem(CreateShape(PxSphereGeometry(axisSize)), zAxisTr, Vector4(0, 0, 1, 1));
 
+	groundTr = new PxTransform({ 0,0,0 });
+	ground = new RenderItem(CreateShape(PxBoxGeometry(50,0.1,50)), groundTr, Vector4(1, 1, 1, 1));
+
+
 	//p1 = new Particle({ 0,0,0 }, { 10,0,0 }, 1, {1,0,0,1});
-	p1 = new Proyectile({ 0,0,0 }, { 10,0,0 }, 1, 1, { 1,0,0,1 });
+	//p1 = new Proyectile({ 0,50,0 }, { 10,0,0 }, 1, 1, { 1,0,0,1 });
+
+	pool = new ProyectilePool();
 
 	RegisterRenderItem(xAxis);
 	RegisterRenderItem(yAxis);
 	RegisterRenderItem(zAxis);
+	RegisterRenderItem(ground);
 	}
 
 
@@ -98,7 +111,7 @@ void stepPhysics(bool interactive, double t)
 {
 	PX_UNUSED(interactive);
 
-	p1->integrate(t);
+	pool->integrate(t);
 
 	gScene->simulate(t);
 	gScene->fetchResults(true);
@@ -114,11 +127,12 @@ void cleanupPhysics(bool interactive)
 	gScene->release();
 	gDispatcher->release();
 
-	delete p1;
+	delete pool;
 
 	DeregisterRenderItem(xAxis);
 	DeregisterRenderItem(yAxis);
 	DeregisterRenderItem(zAxis);
+	DeregisterRenderItem(ground);
 
 	// -----------------------------------------------------
 	gPhysics->release();	
@@ -129,14 +143,40 @@ void cleanupPhysics(bool interactive)
 	gFoundation->release();
 	}
 
+float quaternionToPitch(const PxQuat& q) {
+	// q = (w, x, y, z)
+	float w = q.w;
+	float x = q.x;
+	float y = q.y;
+	float z = q.z;
+
+	// Calcular el ángulo de pitch (rotación sobre el eje X)
+	float sinp = 2.0f * (w * x + y * z);
+	float cosp = 1.0f - 2.0f * (x * x + y * y);
+	float pitch = std::atan2(sinp, cosp);
+
+	// Retornar el ángulo en grados
+	return pitch;
+}
+
 // Function called when a key is pressed
 void keyPress(unsigned char key, const PxTransform& camera)
 {
 	PX_UNUSED(camera);
-
 	switch(toupper(key))
 	{
-	//case 'B': break;
+	case '1': 
+		pool->getProyectile(camera.p, camera.q.rotate(PxVec3(0, 0, -1)) * 100, 2, 
+			0.3f, {0,0,1,1});
+		break;
+	case '2':
+		pool->getProyectile(camera.p, camera.q.rotate(PxVec3(0, 0, -1)) * 100, 10,
+			1, {0,1,0,1});
+		break;
+	case '3':
+		pool->getProyectile(camera.p, camera.q.rotate(PxVec3(0, 0, -1)) * 100, 20,
+			3, { 1,0,0,1 });
+		break;
 	//case ' ':	break;
 	case ' ':
 	{

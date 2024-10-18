@@ -6,6 +6,8 @@ Particle::Particle(Vector3 Pos, Vector3 Vel, float size, Vector4 color) {
 	vel = Vel;
 	acc = Vector3(0, 0, 0);
 
+	alive = true;
+
 	renderItem = new RenderItem(CreateShape(PxSphereGeometry(size)), &pose, color);
 }
 
@@ -15,11 +17,14 @@ Particle::~Particle() {
 
 void Particle::integrate(double t)
 {
-	// damping
-	vel = vel * std::pow(damping, t); 
+	if (alive)
+	{
+		// damping
+		vel = vel * std::pow(damping, t);
 
-	// acceleration
-	vel = vel + acc * t;
+		// acceleration
+		vel = vel + acc * t;
 
-	pose.p += (vel * t);
+		pose.p += (vel * t);
+	}
 }

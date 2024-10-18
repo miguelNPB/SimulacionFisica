@@ -18,6 +18,8 @@ public:
 
 	void setDamping(float newDamp) { damping = newDamp; }
 	float getDamping() { return damping; }
+
+	bool alive;
 protected:
 	physx::PxTransform pose;
 	RenderItem* renderItem;
