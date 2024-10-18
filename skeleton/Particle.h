@@ -8,6 +8,7 @@ class Particle
 {
 public:
 	Particle(Vector3 Pos, Vector3 Vel, 
+		PxGeometryType::Enum geo = PxGeometryType::Enum::eSPHERE,
 		float size = 1, Vector4 color = Vector4(1,1,1,1));
 	~Particle();
 
@@ -19,9 +20,11 @@ public:
 	void setDamping(float newDamp) { damping = newDamp; }
 	float getDamping() { return damping; }
 
-	bool alive;
+	PxTransform getTransform() { return pose; }
+
+	double timeAlive;
 protected:
-	physx::PxTransform pose;
+	PxTransform pose;
 	RenderItem* renderItem;
 
 	Vector3 vel;

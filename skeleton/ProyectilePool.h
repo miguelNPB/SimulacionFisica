@@ -5,7 +5,7 @@ class ProyectilePool {
 public:
 	Proyectile* getProyectile(Vector3 Pos, Vector3 Vel, float mass,
 		float size = 1, Vector4 color = Vector4(1, 1, 1, 1)) {
-		Proyectile* p = new Proyectile(Pos, Vel, mass, size, color);
+		Proyectile* p = new Proyectile(Pos, Vel, PxGeometryType::Enum::eSPHERE, mass, size, color);
 		pool.push_back(p);
 		return p;
 	}
@@ -18,8 +18,7 @@ public:
 
 	void integrate(double t) {
 		for (auto p : pool)
-			if (p->alive)
-				p->integrate(t);
+			p->integrate(t);
 	}
 private:
 	std::vector<Proyectile*> pool;

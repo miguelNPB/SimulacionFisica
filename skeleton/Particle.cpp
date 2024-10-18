@@ -1,14 +1,27 @@
 #include "Particle.h"
 
-Particle::Particle(Vector3 Pos, Vector3 Vel, float size, Vector4 color) {
+Particle::Particle(Vector3 Pos, Vector3 Vel, PxGeometryType::Enum geoType, float size, Vector4 color) {
 	pose = PxTransform(Pos);
 
 	vel = Vel;
 	acc = Vector3(0, 0, 0);
 
-	alive = true;
+	timeAlive = 0;
 
-	renderItem = new RenderItem(CreateShape(PxSphereGeometry(size)), &pose, color);
+	switch (geoType) {
+	case PxGeometryType::Enum::eSPHERE:
+		renderItem = new RenderItem(CreateShape(PxSphereGeometry(size)), &pose, color);
+		break;
+	case PxGeometryType::Enum::eBOX:
+		renderItem = new RenderItem(CreateShape(PxBoxGeometry(size, size, size)), &pose, color);
+		break;
+	case PxGeometryType::Enum::ePLANE:
+		renderItem = new RenderItem(CreateShape(PxPlaneGeometry()), &pose, color);
+		break;
+	default:
+		renderItem = new RenderItem(CreateShape(PxSphereGeometry(size)), &pose, color);
+		break;
+	}
 }
 
 Particle::~Particle() {
@@ -17,14 +30,13 @@ Particle::~Particle() {
 
 void Particle::integrate(double t)
 {
-	if (alive)
-	{
-		// damping
-		vel = vel * std::pow(damping, t);
+	timeAlive += t;
 
-		// acceleration
-		vel = vel + acc * t;
+	// damping
+	vel = vel * std::pow(damping, t);
 
-		pose.p += (vel * t);
-	}
+	// acceleration
+	vel = vel + acc * t;
+
+	pose.p += (vel * t);
 }

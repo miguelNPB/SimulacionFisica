@@ -5,7 +5,8 @@
 class Proyectile : public Particle
 {
 public:
-	Proyectile(Vector3 Pos, Vector3 Vel, float mass, 
+	Proyectile(Vector3 Pos, Vector3 Vel, 
+		PxGeometryType::Enum geoType, float mass,
 		float size = 1, Vector4 color = Vector4(1,1,1,1));
 
 	~Proyectile();
