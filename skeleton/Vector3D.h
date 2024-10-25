@@ -10,7 +10,8 @@ public:
 
 	float magnitude();
 	Vector3 normalize();
-	Vector3 productScalar(const Vector3& other);
+	float productScalar(const Vector3& other);
+	Vector3 productVectorial(const Vector3& other);
 
 	Vector3 operator+(const Vector3& other);
 	Vector3 operator-(const Vector3& other);

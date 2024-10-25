@@ -4,6 +4,7 @@
 #include <functional>
 #include "Particle.h"
 #include "ParticleGenerator.h"
+#include "ForceGenerator.h"
 
 class ParticleSystem
 {
@@ -17,7 +18,9 @@ public:
 	// tiempo en segundos
 	void setDestroyConditionTimer(double time);
 
-	void addGenerator(ParticleGenerator* gen);
+	void addParticleGenerator(ParticleGenerator* gen);
+
+	void addForceGenerator(ForceGenerator* gen);
 
 	void AddParticle(Particle* p);
 

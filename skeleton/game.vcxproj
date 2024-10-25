@@ -256,6 +256,7 @@
     <ClCompile Include="callbacks.cpp" />
     <ClCompile Include="GeneratorNormal.cpp" />
     <ClCompile Include="GeneratorUniforme.cpp" />
+    <ClCompile Include="GravityGenerator.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="ParticleGenerator.cpp" />
@@ -271,8 +272,10 @@
     <ClInclude Include="CheckML.h" />
     <ClInclude Include="constants.h" />
     <ClInclude Include="core.hpp" />
+    <ClInclude Include="ForceGenerator.h" />
     <ClInclude Include="GeneratorNormal.h" />
     <ClInclude Include="GeneratorUniforme.h" />
+    <ClInclude Include="GravityGenerator.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="ParticleGenerator.h" />
     <ClInclude Include="ParticleSystem.h" />

@@ -32,11 +32,11 @@ void Particle::integrate(double t)
 {
 	timeAlive += t;
 
-	// damping
-	vel = vel * std::pow(damping, t);
-
 	// acceleration
 	vel = vel + acc * t;
 
 	pose.p += (vel * t);
+		
+	// damping
+	vel = vel * std::pow(damping, t);
 }

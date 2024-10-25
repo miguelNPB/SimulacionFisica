@@ -100,7 +100,7 @@ void initPhysics(bool interactive)
 	ground = new RenderItem(CreateShape(PxBoxGeometry(50,0.1,50)), groundTr, Vector4(0, 0, 0, 1));
 
 
-	//p1 = new Particle({ 0,0,0 }, { 10,0,0 }, 1, {1,0,0,1});
+	p1 = new Particle({ 0,0,0 }, { 10,0,0 }, 1, {1,0,0,1});
 	//p1 = new Proyectile({ 0,50,0 }, { 10,0,0 }, 1, 1, { 1,0,0,1 });
 
 	//pool = new ProyectilePool();
@@ -112,7 +112,7 @@ void initPhysics(bool interactive)
 	// de media 0.5 y desviacion tipica 0.2, que luego se mapean con los valores
 	// minimos y maximos
 	generatorPompas = new ParticleSystem({0, 25, 0});
-	generatorPompas->addGenerator(new GeneratorNormal(generatorPompas, 
+	generatorPompas->addParticleGenerator(new GeneratorNormal(generatorPompas, 
 		physx::PxGeometryType::eSPHERE, 0.1, // shape y tiempo de spawn
 		0.5, 0.2, // media y desvTipica
 		{ 1, 1, 1 }, { -1,1,-1 }, // min Dir y max Der
@@ -127,7 +127,7 @@ void initPhysics(bool interactive)
 	// con una distribucion uniforme
 	Vector3 solSpawnPoint = { 20, 25, 0 };
 	generatorSol = new ParticleSystem(solSpawnPoint);
-	generatorSol->addGenerator(new GeneratorUniforme(generatorSol,
+	generatorSol->addParticleGenerator(new GeneratorUniforme(generatorSol,
 		physx::PxGeometryType::eSPHERE, 0.005,
 		{ -1, -1, 0 }, {1, 1, 0},
 		5, 5,
@@ -149,7 +149,7 @@ void initPhysics(bool interactive)
 
 	generatorCuboMulticolor->ToggleGravity();
 
-	generatorCuboMulticolor->addGenerator(new GeneratorUniforme(generatorCuboMulticolor,
+	generatorCuboMulticolor->addParticleGenerator(new GeneratorUniforme(generatorCuboMulticolor,
 		physx::PxGeometryType::eBOX, 0.1,
 		{ 0, 0, 1 }, {0, 0, 1},
 		10, 30,

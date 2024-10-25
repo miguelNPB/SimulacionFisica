@@ -29,7 +29,7 @@ void ParticleSystem::setDestroyConditionTimer(double time) {
 		});
 }
 
-void ParticleSystem::addGenerator(ParticleGenerator* gen) {
+void ParticleSystem::addParticleGenerator(ParticleGenerator* gen) {
 	generators.push_back(gen);
 }
 

@@ -17,6 +17,7 @@
     <ClCompile Include="ParticleGenerator.cpp" />
     <ClCompile Include="GeneratorNormal.cpp" />
     <ClCompile Include="GeneratorUniforme.cpp" />
+    <ClCompile Include="GravityGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -38,6 +39,8 @@
     <ClInclude Include="GeneratorNormal.h" />
     <ClInclude Include="CheckML.h" />
     <ClInclude Include="GeneratorUniforme.h" />
+    <ClInclude Include="ForceGenerator.h" />
+    <ClInclude Include="GravityGenerator.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
