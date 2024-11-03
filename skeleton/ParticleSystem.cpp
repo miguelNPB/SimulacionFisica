@@ -1,4 +1,6 @@
 #include "ParticleSystem.h"
+#include "ParticleGenerator.h"
+#include "ForceGenerator.h"
 
 ParticleSystem::ParticleSystem(Vector3 origin) {
 	timer = 0;
@@ -29,8 +31,12 @@ void ParticleSystem::setDestroyConditionTimer(double time) {
 		});
 }
 
-void ParticleSystem::addParticleGenerator(ParticleGenerator* gen) {
-	generators.push_back(gen);
+void ParticleSystem::addParticleGenerator(ParticleGenerator* pgen) {
+	pGenerators.push_back(pgen);
+}
+
+void ParticleSystem::addForceGenerator(ForceGenerator* fgen) {
+	fGenerators.push_back(fgen);
 }
 
 void ParticleSystem::AddParticle(Particle* p) {
@@ -52,20 +58,19 @@ void ParticleSystem::killParticles() {
 void ParticleSystem::updateParticles(double t) {
 	for (auto p : pool) {
 		p->integrate(t);
-		if (gravity) {
-			p->setAcceleration({ 
-				p->getAcceleration().x, 
-				p->getAcceleration().y - GRAVITY, 
-				p->getAcceleration().z});
-		}
 	}
 		
 }
 
 void ParticleSystem::updateGenerators(double t) {
-	for (auto g : generators) {
+	for (auto g : fGenerators) {
 		g->update(t);
 	}
+
+	for (auto g : pGenerators) {
+		g->update(t);
+	}
+
 }
 
 void ParticleSystem::updateTimer(double t) {

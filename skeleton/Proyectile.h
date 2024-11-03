@@ -11,6 +11,5 @@ public:
 
 	~Proyectile();
 private:
-	float mass;
 };
 

@@ -4,7 +4,7 @@
 class GravityGenerator : public ForceGenerator
 {
 public:
-	GravityGenerator(std::vector<Particle*>* pool, Vector3 direction, double gravity);
+	GravityGenerator(ParticleSystem* sysRef, Vector3 direction, double gravity);
 
 	virtual void applyForce(Particle* p) override;
 private:

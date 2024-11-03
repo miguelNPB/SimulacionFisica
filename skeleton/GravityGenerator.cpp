@@ -1,6 +1,6 @@
 #include "GravityGenerator.h"
 
-GravityGenerator::GravityGenerator(std::vector<Particle*>* pool, Vector3 direction, double gravity)
+GravityGenerator::GravityGenerator(ParticleSystem* pool, Vector3 direction, double gravity)
 	: ForceGenerator(pool) {
 	this->direction = direction;
 	this->gravity = gravity;
@@ -10,5 +10,5 @@ GravityGenerator::GravityGenerator(std::vector<Particle*>* pool, Vector3 directi
 
 void GravityGenerator::applyForce(Particle* p) {
 
-	p->setAcceleration({ p->getAcceleration() + (direction * gravity) });
+	p->setAcceleration({ p->getAcceleration() + (direction * p->getMass() * gravity) });
 }

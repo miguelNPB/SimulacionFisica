@@ -1,20 +1,21 @@
 #pragma once
 #include "Particle.h"
+#include "ParticleSystem.h"
 
 class ForceGenerator
 {
 public:
-	ForceGenerator(std::vector<Particle*>* poolRef) {
+	ForceGenerator(ParticleSystem* poolRef) {
 		this->poolRef = poolRef;
 	}
 
 	virtual void applyForce(Particle* p) = 0;
 
 	void update(double t) {
-		for (auto p : (*poolRef)) {
+		for (Particle* p : *(poolRef->getPoolRef())) {
 			applyForce(p);
 		}
 	}
 protected:
-	std::vector<Particle*>* poolRef;
+	ParticleSystem* poolRef;
 };

@@ -15,6 +15,7 @@ public:
 		Vector3 minDir, Vector3 maxDir,
 		double minSpeed, double maxSpeed,
 		double minSize, double maxSize,
+		double minMass, double maxMass,
 		Vector4 minColor, Vector4 maxColor);
 
 	void spawnParticle() override;
@@ -28,6 +29,7 @@ private:
 	double minSpeed, maxSpeed;
 	Vector3 minDir, maxDir;
 	double minSize, maxSize;
+	double minMass, maxMass;
 	Vector4 minColor, maxColor;
 
 	std::random_device rd;

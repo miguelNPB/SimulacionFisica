@@ -1,12 +1,14 @@
 #include "Particle.h"
 
-Particle::Particle(Vector3 Pos, Vector3 Vel, PxGeometryType::Enum geoType, float size, Vector4 color) {
+Particle::Particle(Vector3 Pos, Vector3 Vel, PxGeometryType::Enum geoType, float size, double mass, Vector4 color) {
 	pose = PxTransform(Pos);
 
 	vel = Vel;
 	acc = Vector3(0, 0, 0);
 
 	timeAlive = 0;
+
+	this->mass = mass;
 
 	switch (geoType) {
 	case PxGeometryType::Enum::eSPHERE:

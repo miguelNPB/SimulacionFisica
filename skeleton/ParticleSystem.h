@@ -3,12 +3,15 @@
 #include <vector>
 #include <functional>
 #include "Particle.h"
-#include "ParticleGenerator.h"
-#include "ForceGenerator.h"
+
+class ParticleGenerator;
+class ForceGenerator;
 
 class ParticleSystem
 {
 public:
+	 
+
 	ParticleSystem(Vector3 origin);
 
 	void update(double t);
@@ -24,10 +27,10 @@ public:
 
 	void AddParticle(Particle* p);
 
-	Vector3 getOrigin() { return origin; }
+	std::vector<Particle*>* getPoolRef() { return &pool; }
 
-	void ToggleGravity() { gravity = !gravity; }
-private:
+	Vector3 getOrigin() { return origin; }
+protected:
 	void killParticles();
 	void updateParticles(double t);
 	void updateGenerators(double t);
@@ -38,7 +41,6 @@ private:
 
 	std::function<bool(Particle*)> destroyCondition;
 	std::vector<Particle*> pool;
-	std::vector<ParticleGenerator*> generators;
-
-	bool gravity = false;
+	std::vector<ParticleGenerator*> pGenerators;
+	std::vector<ForceGenerator*> fGenerators;
 };

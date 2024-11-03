@@ -3,7 +3,7 @@
 
 GeneratorNormal::GeneratorNormal(ParticleSystem* sysRef, physx::PxGeometryType::Enum geoType, double spawnSpeed,
 	double media, double desvStd,Vector3 minDir, Vector3 maxDir, double minSpeed, double maxSpeed, 
-	double minSize, double maxSize, Vector4 minColor, Vector4 maxColor) 
+	double minSize, double maxSize, double minMass, double maxMass, Vector4 minColor, Vector4 maxColor) 
 	: ParticleGenerator(spawnSpeed) {
 	this->sysRef = sysRef;
 	this->geoType = geoType;
@@ -19,6 +19,9 @@ GeneratorNormal::GeneratorNormal(ParticleSystem* sysRef, physx::PxGeometryType::
 
 	this->minSize = minSize;
 	this->maxSize = maxSize;
+
+	this->minMass = minMass;
+	this->maxMass = maxMass;
 
 	this->minColor = minColor;
 	this->maxColor = maxColor;
@@ -38,6 +41,8 @@ void GeneratorNormal::spawnParticle() {
 
 	double rndSize = minSize != maxSize ? genRandomValue(minSize, maxSize) : minSize;
 
+	double rndMass = minMass != maxMass ? genRandomValue(minMass, maxMass) : minMass;
+
 	double rndColorX = minColor.x != maxColor.x ? genRandomValue(minColor.x, maxColor.x) : minColor.x;
 	double rndColorY = minColor.y != maxColor.y ? genRandomValue(minColor.y, maxColor.y) : minColor.y;
 	double rndColorZ = minColor.z != maxColor.z ? genRandomValue(minColor.z, maxColor.z) : minColor.z;
@@ -45,7 +50,7 @@ void GeneratorNormal::spawnParticle() {
 	Vector4 rndColor = Vector4(rndColorX, rndColorY, rndColorZ, rndColorW);
 
 	sysRef->AddParticle(new Particle(sysRef->getOrigin(), rndSpeed * rndDir,
-		geoType, rndSize, rndColor));
+		geoType, rndSize, rndMass, rndColor));
 }
 
 double GeneratorNormal::genRandomValue(double minValue, double maxValue) 

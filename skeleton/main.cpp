@@ -19,6 +19,8 @@
 #include "GeneratorNormal.h"
 #include "GeneratorUniforme.h"
 
+#include "GravityGenerator.h"
+
 std::string display_text = "This is a test";
 
 
@@ -58,6 +60,99 @@ ProyectilePool* pool;
 ParticleSystem* generatorPompas;
 ParticleSystem* generatorSol;
 ParticleSystem* generatorCuboMulticolor;
+
+
+void create_P3() {
+
+	generatorPompas = new ParticleSystem({ 0, 25, 0 });
+	generatorPompas->addParticleGenerator(new GeneratorUniforme(generatorPompas,
+		physx::PxGeometryType::eSPHERE, 0.1, // shape y tiempo de spawn
+		{ 1, 0, 1 }, { -1,0,-1 }, // min Dir y max Der
+		10, 10, // min Speed y max Speed 
+		1, 1, // min Size y max Size
+		1, 1, // min mass y max mass
+		{ 0,1,1,1 }, { 1,1,1,1 })); // min Color y max Color
+	generatorPompas->addForceGenerator(new GravityGenerator(generatorPompas, { 0,-1,0 }, GRAVITY));
+	generatorPompas->setDestroyConditionTimer(3);
+
+
+	Vector3 solSpawnPoint = { 20, 25, 0 };
+	generatorSol = new ParticleSystem(solSpawnPoint);
+	generatorSol->addParticleGenerator(new GeneratorUniforme(generatorSol,
+		physx::PxGeometryType::eSPHERE, 0.005,
+		{ -1, 0, 1 }, { 1, 0, -1 },
+		5, 5,
+		0.3, 0.3,
+		1, 1,
+		{ 0.5, 0, 0, 1 }, { 1, 0, 0, 1 }));
+
+	int radius = 5;
+	generatorSol->setDestroyCondition([radius, solSpawnPoint](Particle* p) {
+		Vector3 pTr = p->getTransform().p;
+		double distancia = sqrt((pow(pTr.x - solSpawnPoint.x, 2) + pow(pTr.y - solSpawnPoint.y, 2)));
+		return distancia > radius;
+		});
+
+	generatorSol->addForceGenerator(new GravityGenerator(generatorSol, { 0, 1, 0 }, 0.5));
+}
+
+// crea los generadores de la P2
+void create_P2() {
+	// Crea bolas azules que suben y se autodestruyen a los 3 segundos.
+	// Todos los valores aleatorios son sacados con una distribucion normal
+	// de media 0.5 y desviacion tipica 0.2, que luego se mapean con los valores
+	// minimos y maximos
+	generatorPompas = new ParticleSystem({ 0, 25, 0 });
+	generatorPompas->addParticleGenerator(new GeneratorNormal(generatorPompas,
+		physx::PxGeometryType::eSPHERE, 0.1, // shape y tiempo de spawn
+		0.5, 0.2, // media y desvTipica
+		{ 1, 1, 1 }, { -1,1,-1 }, // min Dir y max Der
+		10, 10, // min Speed y max Speed 
+		1, 1, // min Size y max Size
+		1, 1, // min mass y max mass
+		{ 0,1,1,1 }, { 1,1,1,1 })); // min Color y max Color
+	generatorPompas->setDestroyConditionTimer(3);
+
+	// Crea bolas rojas de color variado de forma uniforme a cualquier
+	// direccion del eje Z. Se eliminan cuando alcanzan el borde del 
+	// circulo imaginario de radio 5. Todos los valores aleatorios son sacados
+	// con una distribucion uniforme
+	Vector3 solSpawnPoint = { 20, 25, 0 };
+	generatorSol = new ParticleSystem(solSpawnPoint);
+	generatorSol->addParticleGenerator(new GeneratorUniforme(generatorSol,
+		physx::PxGeometryType::eSPHERE, 0.005,
+		{ -1, -1, 0 }, { 1, 1, 0 },
+		5, 5,
+		0.3, 0.3,
+		1, 1,
+		{ 0.5, 0, 0, 1 }, { 1, 0, 0, 1 }));
+
+	int radius = 5;
+	generatorSol->setDestroyCondition([radius, solSpawnPoint](Particle* p) {
+		Vector3 pTr = p->getTransform().p;
+		double distancia = sqrt((pow(pTr.x - solSpawnPoint.x, 2) + pow(pTr.y - solSpawnPoint.y, 2)));
+		return distancia > radius;
+		});
+
+	// Lanza cubos de color aleatorio hacia el eje Z positivo. Les
+	// pone una velocidad aleatoria y están afectados por la gravedad,
+	// su tamaño tambien es aleatorio y mueren al llegar al suelo (y < 0) 
+	// Todos los valores aleatorios son sacados con una distribucion uniforme
+	generatorCuboMulticolor = new ParticleSystem({ 0, 25, 10 });
+
+	//generatorCuboMulticolor->ToggleGravity();
+
+	generatorCuboMulticolor->addParticleGenerator(new GeneratorUniforme(generatorCuboMulticolor,
+		physx::PxGeometryType::eBOX, 0.1,
+		{ 0, 0, 1 }, { 0, 0, 1 },
+		10, 30,
+		0.1, 2,
+		1, 1,
+		{ 0,0,0,1 }, { 1,1,1,1 }));
+	generatorCuboMulticolor->setDestroyCondition([](Particle* p) {
+		return p->getTransform().p.y < 0;
+		});
+}
 
 // Initialize physics engine
 void initPhysics(bool interactive)
@@ -100,71 +195,21 @@ void initPhysics(bool interactive)
 	ground = new RenderItem(CreateShape(PxBoxGeometry(50,0.1,50)), groundTr, Vector4(0, 0, 0, 1));
 
 
-	p1 = new Particle({ 0,0,0 }, { 10,0,0 }, 1, {1,0,0,1});
+	//p1 = new Particle({ 0,0,0 }, { 10,0,0 }, 1, {1,0,0,1});
 	//p1 = new Proyectile({ 0,50,0 }, { 10,0,0 }, 1, 1, { 1,0,0,1 });
 
 	//pool = new ProyectilePool();
 
+	//create_P2();
 
+	create_P3();
 
-	// Crea bolas azules que suben y se autodestruyen a los 3 segundos.
-	// Todos los valores aleatorios son sacados con una distribucion normal
-	// de media 0.5 y desviacion tipica 0.2, que luego se mapean con los valores
-	// minimos y maximos
-	generatorPompas = new ParticleSystem({0, 25, 0});
-	generatorPompas->addParticleGenerator(new GeneratorNormal(generatorPompas, 
-		physx::PxGeometryType::eSPHERE, 0.1, // shape y tiempo de spawn
-		0.5, 0.2, // media y desvTipica
-		{ 1, 1, 1 }, { -1,1,-1 }, // min Dir y max Der
-		10, 10, // min Speed y max Speed 
-		1, 1, // min Size y max Size
-		{ 0,1,1,1 }, {1,1,1,1})); // min Color y max Color
-	generatorPompas->setDestroyConditionTimer(3);
-
-	// Crea bolas rojas de color variado de forma uniforme a cualquier
-	// direccion del eje Z. Se eliminan cuando alcanzan el borde del 
-	// circulo imaginario de radio 5. Todos los valores aleatorios son sacados
-	// con una distribucion uniforme
-	Vector3 solSpawnPoint = { 20, 25, 0 };
-	generatorSol = new ParticleSystem(solSpawnPoint);
-	generatorSol->addParticleGenerator(new GeneratorUniforme(generatorSol,
-		physx::PxGeometryType::eSPHERE, 0.005,
-		{ -1, -1, 0 }, {1, 1, 0},
-		5, 5,
-		0.3, 0.3,
-		{ 0.5, 0, 0, 1 }, {1, 0, 0, 1}));
-
-	int radius = 5;
-	generatorSol->setDestroyCondition([radius,solSpawnPoint](Particle* p) {
-		Vector3 pTr = p->getTransform().p;
-		double distancia = sqrt((pow(pTr.x - solSpawnPoint.x, 2) + pow(pTr.y - solSpawnPoint.y, 2)));
-		return distancia > radius;
-		});
-
-	// Lanza cubos de color aleatorio hacia el eje Z positivo. Les
-	// pone una velocidad aleatoria y están afectados por la gravedad,
-	// su tamaño tambien es aleatorio y mueren al llegar al suelo (y < 0) 
-	// Todos los valores aleatorios son sacados con una distribucion uniforme
-	generatorCuboMulticolor = new ParticleSystem({0, 25, 10});
-
-	generatorCuboMulticolor->ToggleGravity();
-
-	generatorCuboMulticolor->addParticleGenerator(new GeneratorUniforme(generatorCuboMulticolor,
-		physx::PxGeometryType::eBOX, 0.1,
-		{ 0, 0, 1 }, {0, 0, 1},
-		10, 30,
-		0.1, 2,
-		{0,0,0,1}, {1,1,1,1}));
-	generatorCuboMulticolor->setDestroyCondition([](Particle* p) {
-		return p->getTransform().p.y < 0;
-		});
-
+	
 	RegisterRenderItem(xAxis);
 	RegisterRenderItem(yAxis);
 	RegisterRenderItem(zAxis);
 	RegisterRenderItem(ground);
-	}
-
+}
 
 // Function to configure what happens in each step of physics
 // interactive: true if the game is rendering, false if it offline
@@ -175,7 +220,7 @@ void stepPhysics(bool interactive, double t)
 
 	generatorPompas->update(t);
 	generatorSol->update(t);
-	generatorCuboMulticolor->update(t);
+	//generatorCuboMulticolor->update(t);
 
 	gScene->simulate(t);
 	gScene->fetchResults(true);
