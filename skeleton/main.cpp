@@ -20,6 +20,7 @@
 #include "GeneratorUniforme.h"
 
 #include "GravityGenerator.h"
+#include "WindGenerator.h"
 
 std::string display_text = "This is a test";
 
@@ -66,13 +67,14 @@ void create_P3() {
 
 	generatorPompas = new ParticleSystem({ 0, 25, 0 });
 	generatorPompas->addParticleGenerator(new GeneratorUniforme(generatorPompas,
-		physx::PxGeometryType::eSPHERE, 0.1, // shape y tiempo de spawn
-		{ 1, 0, 1 }, { -1,0,-1 }, // min Dir y max Der
-		10, 10, // min Speed y max Speed 
+		physx::PxGeometryType::eSPHERE, 1, // shape y tiempo de spawn
+		{ 0, 0, 0 }, { 0,0,0 }, // min Dir y max Der
+		0, 0, // min Speed y max Speed 
 		1, 1, // min Size y max Size
-		1, 1, // min mass y max mass
+		1, 10, // min mass y max mass
 		{ 0,1,1,1 }, { 1,1,1,1 })); // min Color y max Color
-	generatorPompas->addForceGenerator(new GravityGenerator(generatorPompas, { 0,-1,0 }, GRAVITY));
+	//generatorPompas->addForceGenerator(new GravityGenerator(generatorPompas, { 0,-1,0 }, GRAVITY));
+	generatorPompas->addForceGenerator(new WindGenerator(generatorPompas, { -1, 0, 0 }, 10));
 	generatorPompas->setDestroyConditionTimer(3);
 
 
@@ -83,7 +85,7 @@ void create_P3() {
 		{ -1, 0, 1 }, { 1, 0, -1 },
 		5, 5,
 		0.3, 0.3,
-		1, 1,
+		1, 5,
 		{ 0.5, 0, 0, 1 }, { 1, 0, 0, 1 }));
 
 	int radius = 5;
@@ -93,7 +95,7 @@ void create_P3() {
 		return distancia > radius;
 		});
 
-	generatorSol->addForceGenerator(new GravityGenerator(generatorSol, { 0, 1, 0 }, 0.5));
+	generatorSol->addForceGenerator(new GravityGenerator(generatorSol, { 0, 1, 0 }, GRAVITY));
 }
 
 // crea los generadores de la P2

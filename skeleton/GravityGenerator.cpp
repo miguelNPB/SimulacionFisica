@@ -10,5 +10,5 @@ GravityGenerator::GravityGenerator(ParticleSystem* pool, Vector3 direction, doub
 
 void GravityGenerator::applyForce(Particle* p) {
 
-	p->setAcceleration({ p->getAcceleration() + (direction * p->getMass() * gravity) });
+	p->applyForce(direction * p->getMass() * gravity);
 }

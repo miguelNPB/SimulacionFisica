@@ -14,8 +14,13 @@ public:
 
 	void integrate(double t);
 
-	void setAcceleration(Vector3 newAcc) { acc = newAcc; }
+	Vector3 getVel() { return vel; }
+	void setVel(const Vector3& newVel) { vel = newVel; }
+
+	void setAcceleration(const Vector3& newAcc) { acc = newAcc; }
 	Vector3 getAcceleration() { return acc; }
+
+	void applyForce(const Vector3& force);
 
 	void setDamping(float newDamp) { damping = newDamp; }
 	float getDamping() { return damping; }
@@ -32,6 +37,7 @@ protected:
 	Vector3 vel;
 	Vector3 acc;
 
+	Vector3 forces;
 	double mass;
 
 	double damping = 1;
