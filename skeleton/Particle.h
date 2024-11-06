@@ -26,6 +26,7 @@ public:
 	float getDamping() { return damping; }
 
 	PxTransform getTransform() { return pose; }
+	Vector3 getPosition() { return pose.p; }
 
 	double getInvMass() { return 1.0 / mass; }
 	double getMass() { return mass; }

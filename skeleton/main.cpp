@@ -23,6 +23,7 @@
 
 #include "GravityGenerator.h"
 #include "WindGenerator.h"
+#include "WhirlwindGenerator.h"
 
 std::string display_text = "This is a test";
 
@@ -53,20 +54,23 @@ RenderItem* yAxis;
 PxTransform* yAxisTr;
 RenderItem* zAxis;
 PxTransform* zAxisTr;
-
 RenderItem* ground;
 PxTransform* groundTr;
+
+bool renderP1 = false;
 
 Proyectile* p1;
 ProyectilePool* pool;
 
-ParticleSystem* generatorPompas;
-ParticleSystem* generatorSol;
-ParticleSystem* generatorCuboMulticolor;
+ParticleSystem* generatorPompas = nullptr;
+ParticleSystem* generatorSol = nullptr;
+ParticleSystem* generatorCuboMulticolor = nullptr;
 
+ParticleSystem* whirlwind = nullptr;
 
 void create_P3() {
 
+	/*
 	generatorPompas = new ParticleSystem({ 0, 50, 0 });
 	generatorPompas->addParticleGenerator(new CustomParticleGenerator(generatorPompas, 0.05,
 		[](){
@@ -83,26 +87,28 @@ void create_P3() {
 	generatorPompas->addForceGenerator(new GravityGenerator(generatorPompas, { 0,-1,0 }, GRAVITY));
 	generatorPompas->addForceGenerator(new WindGenerator(generatorPompas, { -1, 0, 0 }, 90));
 	generatorPompas->setDestroyConditionTimer(3);
+	*/
 
+	float whirlwindRadius = 30;
+	whirlwind = new ParticleSystem(Vector3(0, 0, 0));
+	whirlwind->addParticleGenerator(new CustomParticleGenerator(whirlwind, 0.01, 
+		[](){
+			std::random_device rd;
+			std::mt19937 gen(rd());
+			std::uniform_real_distribution<float>dist(-1, 1);
 
-	Vector3 solSpawnPoint = { 20, 25, 0 };
-	generatorSol = new ParticleSystem(solSpawnPoint);
-	generatorSol->addParticleGenerator(new GeneratorUniforme(generatorSol,
-		physx::PxGeometryType::eSPHERE, 0.005,
-		{ -1, 0, 1 }, { 1, 0, -1 },
-		5, 5,
-		0.3, 0.3,
-		1, 5,
-		{ 0.5, 0, 0, 1 }, { 1, 0, 0, 1 }));
+			Vector3 particlePos = whirlwind->getOrigin() + Vector3(dist(gen), 0, dist(gen));
 
-	int radius = 5;
-	generatorSol->setDestroyCondition([radius, solSpawnPoint](Particle* p) {
+			return new Particle(particlePos, Vector3(0, 0, 0),
+				physx::PxGeometryType::eSPHERE, 1, 1,
+				Vector4(1, 0, 1, 1));
+		}));
+	whirlwind->addForceGenerator(new WhirlwindGenerator(whirlwind, whirlwindRadius, 0, 5));
+	whirlwind->setDestroyCondition([whirlwindRadius](Particle* p) {
 		Vector3 pTr = p->getTransform().p;
-		double distancia = sqrt((pow(pTr.x - solSpawnPoint.x, 2) + pow(pTr.y - solSpawnPoint.y, 2)));
-		return distancia > radius;
+		double distancia = sqrt((pow(pTr.x - whirlwind->getOrigin().x, 2) + pow(pTr.y - whirlwind->getOrigin().y, 2) + pow(pTr.z - whirlwind->getOrigin().z, 2)));
+		return distancia > whirlwindRadius;
 		});
-
-	generatorSol->addForceGenerator(new GravityGenerator(generatorSol, { 0, 1, 0 }, GRAVITY));
 }
 
 // crea los generadores de la P2
@@ -163,6 +169,28 @@ void create_P2() {
 		});
 }
 
+// crea suelo y axis
+void create_P1() {
+	renderP1 = true;
+
+	xAxisTr = new PxTransform({ axisLength,0,0 });
+	xAxis = new RenderItem(CreateShape(PxSphereGeometry(axisSize)), xAxisTr, Vector4(1, 0, 0, 1));
+
+	yAxisTr = new PxTransform({ 0,axisLength,0 });
+	yAxis = new RenderItem(CreateShape(PxSphereGeometry(axisSize)), yAxisTr, Vector4(0, 1, 0, 1));
+
+	zAxisTr = new PxTransform({ 0,0,axisLength });
+	zAxis = new RenderItem(CreateShape(PxSphereGeometry(axisSize)), zAxisTr, Vector4(0, 0, 1, 1));
+
+	groundTr = new PxTransform({ 0,0,0 });
+	ground = new RenderItem(CreateShape(PxBoxGeometry(50, 0.1, 50)), groundTr, Vector4(0.2, 0.2, 0.2, 1));
+
+	RegisterRenderItem(xAxis);
+	RegisterRenderItem(yAxis);
+	RegisterRenderItem(zAxis);
+	RegisterRenderItem(ground);
+}
+
 // Initialize physics engine
 void initPhysics(bool interactive)
 {
@@ -187,37 +215,13 @@ void initPhysics(bool interactive)
 	sceneDesc.simulationEventCallback = &gContactReportCallback;
 	gScene = gPhysics->createScene(sceneDesc);
 
+	// // // // // // // // // 
 
-	// PRACTICA 1
-
-	// ejes 
-	xAxisTr = new PxTransform({ axisLength,0,0 });
-	xAxis = new RenderItem(CreateShape(PxSphereGeometry(axisSize)), xAxisTr, Vector4(1, 0, 0, 1));
-
-	yAxisTr = new PxTransform({ 0,axisLength,0 });
-	yAxis = new RenderItem(CreateShape(PxSphereGeometry(axisSize)), yAxisTr, Vector4(0, 1, 0, 1));
-
-	zAxisTr = new PxTransform({ 0,0,axisLength });
-	zAxis = new RenderItem(CreateShape(PxSphereGeometry(axisSize)), zAxisTr, Vector4(0, 0, 1, 1));
-
-	groundTr = new PxTransform({ 0,0,0 });
-	ground = new RenderItem(CreateShape(PxBoxGeometry(50,0.1,50)), groundTr, Vector4(0.2, 0.2, 0.2, 1));
-
-
-	//p1 = new Particle({ 0,0,0 }, { 10,0,0 }, 1, {1,0,0,1});
-	//p1 = new Proyectile({ 0,50,0 }, { 10,0,0 }, 1, 1, { 1,0,0,1 });
-
-	//pool = new ProyectilePool();
+	//create_P1();
 
 	//create_P2();
 
 	create_P3();
-
-	
-	RegisterRenderItem(xAxis);
-	RegisterRenderItem(yAxis);
-	RegisterRenderItem(zAxis);
-	RegisterRenderItem(ground);
 }
 
 // Function to configure what happens in each step of physics
@@ -227,9 +231,14 @@ void stepPhysics(bool interactive, double t)
 {
 	PX_UNUSED(interactive);
 
-	generatorPompas->update(t);
-	generatorSol->update(t);
-	//generatorCuboMulticolor->update(t);
+	if (generatorPompas != nullptr)
+		generatorPompas->update(t);
+	if (generatorSol != nullptr)
+		generatorSol->update(t);
+	if (generatorCuboMulticolor != nullptr)
+		generatorCuboMulticolor->update(t);
+	if (whirlwind != nullptr)
+		whirlwind->update(t);
 
 	gScene->simulate(t);
 	gScene->fetchResults(true);
@@ -247,12 +256,15 @@ void cleanupPhysics(bool interactive)
 
 	delete generatorPompas;
 	delete generatorSol;
-	//delete generatorCuboMulticolor;
+	delete generatorCuboMulticolor;
+	delete whirlwind;
 
-	DeregisterRenderItem(xAxis);
-	DeregisterRenderItem(yAxis);
-	DeregisterRenderItem(zAxis);
-	DeregisterRenderItem(ground);
+	if (renderP1) {
+		DeregisterRenderItem(xAxis);
+		DeregisterRenderItem(yAxis);
+		DeregisterRenderItem(zAxis);
+		DeregisterRenderItem(ground);
+	}
 
 	// -----------------------------------------------------
 	gPhysics->release();	
