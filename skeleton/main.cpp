@@ -3,6 +3,7 @@
 #include <PxPhysicsAPI.h>
 
 #include <vector>
+#include <random>
 
 #include "core.hpp"
 #include "RenderUtils.hpp"
@@ -18,6 +19,7 @@
 
 #include "GeneratorNormal.h"
 #include "GeneratorUniforme.h"
+#include "CustomParticleGenerator.h"
 
 #include "GravityGenerator.h"
 #include "WindGenerator.h"
@@ -65,16 +67,21 @@ ParticleSystem* generatorCuboMulticolor;
 
 void create_P3() {
 
-	generatorPompas = new ParticleSystem({ 0, 25, 0 });
-	generatorPompas->addParticleGenerator(new GeneratorUniforme(generatorPompas,
-		physx::PxGeometryType::eSPHERE, 1, // shape y tiempo de spawn
-		{ 0, 0, 0 }, { 0,0,0 }, // min Dir y max Der
-		0, 0, // min Speed y max Speed 
-		1, 1, // min Size y max Size
-		1, 10, // min mass y max mass
-		{ 0,1,1,1 }, { 1,1,1,1 })); // min Color y max Color
-	//generatorPompas->addForceGenerator(new GravityGenerator(generatorPompas, { 0,-1,0 }, GRAVITY));
-	generatorPompas->addForceGenerator(new WindGenerator(generatorPompas, { -1, 0, 0 }, 10));
+	generatorPompas = new ParticleSystem({ 0, 50, 0 });
+	generatorPompas->addParticleGenerator(new CustomParticleGenerator(generatorPompas, 0.05,
+		[](){
+			std::random_device rd;
+			std::mt19937 gen(rd());
+			std::uniform_real_distribution<float>dist(1, 10);
+
+			float pesoRnd = dist(gen);
+			float color = (float)pesoRnd / 10;
+			return new Particle(generatorPompas->getOrigin(), Vector3(0, 0, 0),
+				physx::PxGeometryType::eSPHERE, 1, pesoRnd,
+				Vector4(1 - color,1 - color,1 - color,1));
+		}));
+	generatorPompas->addForceGenerator(new GravityGenerator(generatorPompas, { 0,-1,0 }, GRAVITY));
+	generatorPompas->addForceGenerator(new WindGenerator(generatorPompas, { -1, 0, 0 }, 90));
 	generatorPompas->setDestroyConditionTimer(3);
 
 
@@ -194,7 +201,7 @@ void initPhysics(bool interactive)
 	zAxis = new RenderItem(CreateShape(PxSphereGeometry(axisSize)), zAxisTr, Vector4(0, 0, 1, 1));
 
 	groundTr = new PxTransform({ 0,0,0 });
-	ground = new RenderItem(CreateShape(PxBoxGeometry(50,0.1,50)), groundTr, Vector4(0, 0, 0, 1));
+	ground = new RenderItem(CreateShape(PxBoxGeometry(50,0.1,50)), groundTr, Vector4(0.2, 0.2, 0.2, 1));
 
 
 	//p1 = new Particle({ 0,0,0 }, { 10,0,0 }, 1, {1,0,0,1});

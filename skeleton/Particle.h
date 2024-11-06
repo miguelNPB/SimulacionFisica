@@ -27,6 +27,7 @@ public:
 
 	PxTransform getTransform() { return pose; }
 
+	double getInvMass() { return 1.0 / mass; }
 	double getMass() { return mass; }
 
 	double timeAlive;

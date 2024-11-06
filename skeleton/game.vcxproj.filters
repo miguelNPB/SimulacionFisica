@@ -19,6 +19,7 @@
     <ClCompile Include="GeneratorUniforme.cpp" />
     <ClCompile Include="GravityGenerator.cpp" />
     <ClCompile Include="WindGenerator.cpp" />
+    <ClCompile Include="CustomParticleGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -43,6 +44,7 @@
     <ClInclude Include="ForceGenerator.h" />
     <ClInclude Include="GravityGenerator.h" />
     <ClInclude Include="WindGenerator.h" />
+    <ClInclude Include="CustomParticleGenerator.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

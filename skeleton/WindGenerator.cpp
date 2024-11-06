@@ -13,5 +13,5 @@ void WindGenerator::applyForce(Particle* p) {
 	Vector3 aux = p->getVel() - windVelocity;
 
 	Vector3 windForce = k1 * aux + k2 * (aux.magnitude() * aux);
-	p->applyForce(windForce / p->getMass());
+	p->applyForce(windForce * p->getInvMass());
 }
