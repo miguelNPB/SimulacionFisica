@@ -21,6 +21,7 @@
     <ClCompile Include="WindGenerator.cpp" />
     <ClCompile Include="CustomParticleGenerator.cpp" />
     <ClCompile Include="WhirlwindGenerator.cpp" />
+    <ClCompile Include="ExplosionGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -47,6 +48,7 @@
     <ClInclude Include="WindGenerator.h" />
     <ClInclude Include="CustomParticleGenerator.h" />
     <ClInclude Include="WhirlwindGenerator.h" />
+    <ClInclude Include="ExplosionGenerator.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

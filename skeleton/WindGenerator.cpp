@@ -1,6 +1,6 @@
 #include "WindGenerator.h"
 
-WindGenerator::WindGenerator(ParticleSystem* sysRef, Vector3 direction, double radius, double strength) 
+WindGenerator::WindGenerator(ParticleSystem* sysRef, Vector3 direction, float radius, float strength)
 	: ForceGenerator(sysRef) {
 	this->direction = direction;
 	this->radius = radius;
@@ -13,8 +13,8 @@ void WindGenerator::applyForce(Particle* p) {
 		return;
 
 	Vector3 windVelocity = direction * strength;
-	double k1 = 0.5; // coef rozamiento aire
-	double k2 = 0;
+	float k1 = 0.5; // coef rozamiento aire
+	float k2 = 0;
 	Vector3 aux = p->getVel() - windVelocity;
 
 	Vector3 windForce = k1 * aux + k2 * (aux.magnitude() * aux);

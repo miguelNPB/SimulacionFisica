@@ -24,6 +24,7 @@
 #include "GravityGenerator.h"
 #include "WindGenerator.h"
 #include "WhirlwindGenerator.h"
+#include "ExplosionGenerator.h"
 
 std::string display_text = "This is a test";
 
@@ -68,6 +69,9 @@ ParticleSystem* generatorCuboMulticolor = nullptr;
 
 ParticleSystem* whirlwind = nullptr;
 
+ParticleSystem* partSystem = nullptr;
+ExplosionGenerator* explosion = nullptr;
+
 void create_P3() {
 
 	/*
@@ -89,6 +93,7 @@ void create_P3() {
 	generatorPompas->setDestroyConditionTimer(3);
 	*/
 
+	/*
 	float whirlwindRadius = 30;
 	whirlwind = new ParticleSystem(Vector3(0, 0, 0));
 	whirlwind->addParticleGenerator(new CustomParticleGenerator(whirlwind, 0.01, 
@@ -106,8 +111,30 @@ void create_P3() {
 	whirlwind->addForceGenerator(new WhirlwindGenerator(whirlwind, whirlwindRadius, 0, 5));
 	whirlwind->setDestroyCondition([whirlwindRadius](Particle* p) {
 		Vector3 pTr = p->getTransform().p;
-		double distancia = sqrt((pow(pTr.x - whirlwind->getOrigin().x, 2) + pow(pTr.y - whirlwind->getOrigin().y, 2) + pow(pTr.z - whirlwind->getOrigin().z, 2)));
+		float distancia = sqrt((pow(pTr.x - whirlwind->getOrigin().x, 2) + pow(pTr.y - whirlwind->getOrigin().y, 2) + pow(pTr.z - whirlwind->getOrigin().z, 2)));
 		return distancia > whirlwindRadius;
+		});
+	*/
+
+	partSystem = new ParticleSystem(Vector3(0, 25, 0));
+	partSystem->addParticleGenerator(new CustomParticleGenerator(partSystem, 0.01,
+		[]() {
+			std::random_device rd;
+			std::mt19937 gen(rd());
+			std::uniform_real_distribution<float>dist(-10, 10);
+
+			Vector3 particlePos = partSystem->getOrigin() + Vector3(dist(gen), dist(gen), dist(gen));
+
+			return new Particle(particlePos, Vector3(0, 0, 0),
+				physx::PxGeometryType::eSPHERE, 1, 1,
+				Vector4(1, 0, 1, 1));
+		}));
+	explosion = new ExplosionGenerator(partSystem, 15, 10000, 1);
+	partSystem->addForceGenerator(explosion);
+	partSystem->setDestroyCondition([](Particle* p) {
+		Vector3 pTr = p->getPosition();
+		float distancia = sqrt((pow(pTr.x - partSystem->getOrigin().x, 2) + pow(pTr.y - partSystem->getOrigin().y, 2) + pow(pTr.z - partSystem->getOrigin().z, 2)));
+		return distancia > 50;
 		});
 }
 
@@ -239,6 +266,8 @@ void stepPhysics(bool interactive, double t)
 		generatorCuboMulticolor->update(t);
 	if (whirlwind != nullptr)
 		whirlwind->update(t);
+	if (partSystem != nullptr)
+		partSystem->update(t);
 
 	gScene->simulate(t);
 	gScene->fetchResults(true);
@@ -258,6 +287,7 @@ void cleanupPhysics(bool interactive)
 	delete generatorSol;
 	delete generatorCuboMulticolor;
 	delete whirlwind;
+	delete partSystem;
 
 	if (renderP1) {
 		DeregisterRenderItem(xAxis);
@@ -309,7 +339,10 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		pool->getProyectile(camera.p, camera.q.rotate(PxVec3(0, 0, -1)) * 100, 20,
 			3, { 1,0,0,1 });
 		break;
-	//case ' ':	break;
+	case 'F':
+		if (explosion != nullptr)
+			explosion->explode();
+		break;
 	case ' ':
 	{
 		break;

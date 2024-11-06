@@ -4,11 +4,11 @@
 class GravityGenerator : public ForceGenerator
 {
 public:
-	GravityGenerator(ParticleSystem* sysRef, Vector3 direction, double gravity);
+	GravityGenerator(ParticleSystem* sysRef, Vector3 direction, float gravity);
 
 	virtual void applyForce(Particle* p) override;
 private:
 	Vector3 direction;
-	double gravity;
+	float gravity;
 };
 

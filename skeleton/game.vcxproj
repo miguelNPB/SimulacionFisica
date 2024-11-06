@@ -255,6 +255,7 @@
   <ItemGroup>
     <ClCompile Include="callbacks.cpp" />
     <ClCompile Include="CustomParticleGenerator.cpp" />
+    <ClCompile Include="ExplosionGenerator.cpp" />
     <ClCompile Include="GeneratorNormal.cpp" />
     <ClCompile Include="GeneratorUniforme.cpp" />
     <ClCompile Include="GravityGenerator.cpp" />
@@ -276,6 +277,7 @@
     <ClInclude Include="constants.h" />
     <ClInclude Include="core.hpp" />
     <ClInclude Include="CustomParticleGenerator.h" />
+    <ClInclude Include="ExplosionGenerator.h" />
     <ClInclude Include="ForceGenerator.h" />
     <ClInclude Include="GeneratorNormal.h" />
     <ClInclude Include="GeneratorUniforme.h" />

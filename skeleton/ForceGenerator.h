@@ -11,7 +11,7 @@ public:
 
 	virtual void applyForce(Particle* p) = 0;
 
-	void update(double t) {
+	virtual void update(float t) {
 		for (Particle* p : *(poolRef->getPoolRef())) {
 			applyForce(p);
 		}

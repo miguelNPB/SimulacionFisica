@@ -1,6 +1,6 @@
 #include "WhirlwindGenerator.h"
 
-WhirlwindGenerator::WhirlwindGenerator(ParticleSystem* sysRef, double radius, double height, double strength) 
+WhirlwindGenerator::WhirlwindGenerator(ParticleSystem* sysRef, float radius, float height, float strength)
 	: ForceGenerator(sysRef) {
 	this->strength = strength;
 	this->radius = radius;

@@ -4,11 +4,11 @@
 class WhirlwindGenerator : public ForceGenerator
 {
 public:
-	WhirlwindGenerator(ParticleSystem* sysRef, double radius, double height, double strength);
+	WhirlwindGenerator(ParticleSystem* sysRef, float radius, float height, float strength);
 
 	virtual void applyForce(Particle* p) override;
 private:
-	double radius;
-	double strength;
-	double height;
+	float radius;
+	float strength;
+	float height;
 };
