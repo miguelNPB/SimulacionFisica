@@ -18,11 +18,11 @@ public:
 private:
 	ParticleSystem* anchor;
 	ParticleSystem* particleAttached;
+	ParticleSystem* slinkyParticles;
 	Particle* p1;
 	Particle* p2;
 	Particle* p3;
 	SpringJoinParticles* p2_SJP;
 	SpringJoinParticles* p3_SJP;
-	SpringJoinParticles* p4_SJP;
 };
 
