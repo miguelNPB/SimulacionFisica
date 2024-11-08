@@ -39,10 +39,8 @@ void Particle::integrate(double t)
 
 	// acceleration
 	Vector3 accTotal = acc + forces;
-	vel = vel + accTotal * t;
+	vel = vel * std::pow(damping, t) + (accTotal * t);
 		
-	// damping
-	vel = vel * std::pow(damping, t);
 
 	forces = forces * 0;
 }

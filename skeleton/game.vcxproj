@@ -266,9 +266,12 @@
     <ClCompile Include="RenderUtils.cpp" />
     <ClCompile Include="Render\Camera.cpp" />
     <ClCompile Include="Render\Render.cpp" />
+    <ClCompile Include="Scenes\SceneMuelles.cpp" />
     <ClCompile Include="Scenes\SceneExplosion.cpp" />
     <ClCompile Include="Scenes\SceneWhirlwind.cpp" />
     <ClCompile Include="Scenes\SceneWind.cpp" />
+    <ClCompile Include="F_Generators\SpringJoinParticles.cpp" />
+    <ClCompile Include="F_Generators\SpringAnchorGenerator.cpp" />
     <ClCompile Include="Vector3D.cpp" />
     <ClCompile Include="F_Generators\WhirlwindGenerator.cpp" />
     <ClCompile Include="F_Generators\WindGenerator.cpp" />
@@ -292,10 +295,13 @@
     <ClInclude Include="RenderUtils.hpp" />
     <ClInclude Include="Render\Camera.h" />
     <ClInclude Include="Render\Render.h" />
+    <ClInclude Include="Scenes\SceneMuelles.h" />
     <ClInclude Include="Scenes\SceneExplosion.h" />
     <ClInclude Include="Scenes\Scene.h" />
     <ClInclude Include="Scenes\SceneWhirlwind.h" />
     <ClInclude Include="Scenes\SceneWind.h" />
+    <ClInclude Include="F_Generators\SpringJoinParticles.h" />
+    <ClInclude Include="F_Generators\SpringAnchorGenerator.h" />
     <ClInclude Include="Vector3D.h" />
     <ClInclude Include="F_Generators\WhirlwindGenerator.h" />
     <ClInclude Include="F_Generators\WindGenerator.h" />

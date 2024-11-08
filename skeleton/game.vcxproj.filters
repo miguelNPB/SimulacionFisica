@@ -24,6 +24,9 @@
     <ClCompile Include="Scenes\SceneExplosion.cpp" />
     <ClCompile Include="Scenes\SceneWhirlwind.cpp" />
     <ClCompile Include="Scenes\SceneWind.cpp" />
+    <ClCompile Include="Scenes\SceneMuelles.cpp" />
+    <ClCompile Include="F_Generators\SpringJoinParticles.cpp" />
+    <ClCompile Include="F_Generators\SpringAnchorGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -55,6 +58,9 @@
     <ClInclude Include="Scenes\SceneExplosion.h" />
     <ClInclude Include="Scenes\SceneWhirlwind.h" />
     <ClInclude Include="Scenes\SceneWind.h" />
+    <ClInclude Include="Scenes\SceneMuelles.h" />
+    <ClInclude Include="F_Generators\SpringJoinParticles.h" />
+    <ClInclude Include="F_Generators\SpringAnchorGenerator.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

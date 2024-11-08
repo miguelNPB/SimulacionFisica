@@ -18,6 +18,7 @@
 #include "Scenes/SceneExplosion.h"
 #include "Scenes/SceneWhirlwind.h"
 #include "Scenes/SceneWind.h"
+#include "Scenes/SceneMuelles.h"
 
 std::string display_text = "This is a test";
 
@@ -41,15 +42,6 @@ ContactReportCallback gContactReportCallback;
 /// /// /// 
 
 Scene* currentScene = nullptr;
-
-ParticleSystem* generatorPompas = nullptr;
-ParticleSystem* generatorSol = nullptr;
-ParticleSystem* generatorCuboMulticolor = nullptr;
-
-ParticleSystem* whirlwind = nullptr;
-
-ParticleSystem* partSystem = nullptr;
-ExplosionGenerator* explosion = nullptr;
 
 
 // crea los generadores de la P2
@@ -139,7 +131,7 @@ void initPhysics(bool interactive)
 
 	// // // // // // // // // 
 
-	currentScene = new SceneWind();
+	currentScene = new SceneMuelles();
 }
 
 // Function to configure what happens in each step of physics
@@ -214,6 +206,9 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		break;
 	case '3':
 		switchScene(new SceneExplosion());
+		break;
+	case '4':
+		switchScene(new SceneMuelles());
 		break;
 	case ' ':
 	{
