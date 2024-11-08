@@ -1,17 +1,16 @@
 #pragma once
 #include "ParticleGenerator.h"
-#include "ParticleSystem.h"
+#include "../ParticleSystem.h"
 #include <random>
 #include <cmath>
 #include <algorithm>
 
-class GeneratorNormal : public ParticleGenerator
+class GeneratorUniforme : public ParticleGenerator
 {
 public:
 	// meter los valores de media y desvSTD para del 0 al 1
-	GeneratorNormal(ParticleSystem* sysRef, 
+	GeneratorUniforme(ParticleSystem* sysRef,
 		physx::PxGeometryType::Enum geo, double spawnSpeed,
-		double media, double desvStd, 
 		Vector3 minDir, Vector3 maxDir,
 		double minSpeed, double maxSpeed,
 		double minSize, double maxSize,
@@ -25,7 +24,6 @@ private:
 	ParticleSystem* sysRef;
 	physx::PxGeometryType::Enum geoType;
 
-	double media, desvStd;
 	double minSpeed, maxSpeed;
 	Vector3 minDir, maxDir;
 	double minSize, maxSize;
@@ -34,6 +32,6 @@ private:
 
 	std::random_device rd;
 	std::mt19937 gen;
-	std::normal_distribution<double> dist;
+	std::uniform_real_distribution<double> dist;
 };
 

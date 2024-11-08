@@ -10,9 +10,9 @@ class ForceGenerator;
 class ParticleSystem
 {
 public:
-	 
-
 	ParticleSystem(Vector3 origin);
+
+	~ParticleSystem();
 
 	void update(double t);
 

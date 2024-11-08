@@ -1,6 +1,6 @@
 #include "ParticleSystem.h"
-#include "ParticleGenerator.h"
-#include "ForceGenerator.h"
+#include "P_Generators/ParticleGenerator.h"
+#include "F_Generators/ForceGenerator.h"
 
 ParticleSystem::ParticleSystem(Vector3 origin) {
 	timer = 0;
@@ -11,6 +11,23 @@ ParticleSystem::ParticleSystem(Vector3 origin) {
 		return false;
 		});
 
+}
+
+ParticleSystem::~ParticleSystem() {
+	for (auto it = fGenerators.begin(); it < fGenerators.end(); ) {
+		delete* it;
+		it = fGenerators.erase(it);
+	}
+
+	for (auto it = pGenerators.begin(); it < pGenerators.end(); ) {
+		delete* it;
+		it = pGenerators.erase(it);
+	}
+
+	for (auto it = pool.begin(); it < pool.end(); ) {
+		delete* it;
+		it = pool.erase(it);
+	}
 }
 
 

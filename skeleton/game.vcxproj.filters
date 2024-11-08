@@ -14,14 +14,16 @@
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="Proyectile.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
-    <ClCompile Include="ParticleGenerator.cpp" />
-    <ClCompile Include="GeneratorNormal.cpp" />
-    <ClCompile Include="GeneratorUniforme.cpp" />
-    <ClCompile Include="GravityGenerator.cpp" />
-    <ClCompile Include="WindGenerator.cpp" />
-    <ClCompile Include="CustomParticleGenerator.cpp" />
-    <ClCompile Include="WhirlwindGenerator.cpp" />
-    <ClCompile Include="ExplosionGenerator.cpp" />
+    <ClCompile Include="P_Generators\GeneratorNormal.cpp" />
+    <ClCompile Include="P_Generators\GeneratorUniforme.cpp" />
+    <ClCompile Include="F_Generators\GravityGenerator.cpp" />
+    <ClCompile Include="F_Generators\WindGenerator.cpp" />
+    <ClCompile Include="P_Generators\CustomParticleGenerator.cpp" />
+    <ClCompile Include="F_Generators\WhirlwindGenerator.cpp" />
+    <ClCompile Include="F_Generators\ExplosionGenerator.cpp" />
+    <ClCompile Include="Scenes\SceneExplosion.cpp" />
+    <ClCompile Include="Scenes\SceneWhirlwind.cpp" />
+    <ClCompile Include="Scenes\SceneWind.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -39,16 +41,20 @@
     <ClInclude Include="constants.h" />
     <ClInclude Include="ProyectilePool.h" />
     <ClInclude Include="ParticleSystem.h" />
-    <ClInclude Include="ParticleGenerator.h" />
-    <ClInclude Include="GeneratorNormal.h" />
+    <ClInclude Include="P_Generators\ParticleGenerator.h" />
+    <ClInclude Include="P_Generators\GeneratorNormal.h" />
     <ClInclude Include="CheckML.h" />
-    <ClInclude Include="GeneratorUniforme.h" />
-    <ClInclude Include="ForceGenerator.h" />
-    <ClInclude Include="GravityGenerator.h" />
-    <ClInclude Include="WindGenerator.h" />
-    <ClInclude Include="CustomParticleGenerator.h" />
-    <ClInclude Include="WhirlwindGenerator.h" />
-    <ClInclude Include="ExplosionGenerator.h" />
+    <ClInclude Include="P_Generators\GeneratorUniforme.h" />
+    <ClInclude Include="F_Generators\ForceGenerator.h" />
+    <ClInclude Include="F_Generators\GravityGenerator.h" />
+    <ClInclude Include="F_Generators\WindGenerator.h" />
+    <ClInclude Include="P_Generators\CustomParticleGenerator.h" />
+    <ClInclude Include="F_Generators\WhirlwindGenerator.h" />
+    <ClInclude Include="F_Generators\ExplosionGenerator.h" />
+    <ClInclude Include="Scenes\Scene.h" />
+    <ClInclude Include="Scenes\SceneExplosion.h" />
+    <ClInclude Include="Scenes\SceneWhirlwind.h" />
+    <ClInclude Include="Scenes\SceneWind.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
