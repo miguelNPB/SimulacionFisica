@@ -254,6 +254,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="callbacks.cpp" />
+    <ClCompile Include="F_Generators\FloatingGenerator.cpp" />
     <ClCompile Include="P_Generators\CustomParticleGenerator.cpp" />
     <ClCompile Include="F_Generators\ExplosionGenerator.cpp" />
     <ClCompile Include="P_Generators\GeneratorNormal.cpp" />
@@ -266,6 +267,7 @@
     <ClCompile Include="RenderUtils.cpp" />
     <ClCompile Include="Render\Camera.cpp" />
     <ClCompile Include="Render\Render.cpp" />
+    <ClCompile Include="Scenes\SceneFloating.cpp" />
     <ClCompile Include="Scenes\SceneMuelles.cpp" />
     <ClCompile Include="Scenes\SceneExplosion.cpp" />
     <ClCompile Include="Scenes\SceneWhirlwind.cpp" />
@@ -281,6 +283,7 @@
     <ClInclude Include="CheckML.h" />
     <ClInclude Include="constants.h" />
     <ClInclude Include="core.hpp" />
+    <ClInclude Include="F_Generators\FloatingGenerator.h" />
     <ClInclude Include="P_Generators\CustomParticleGenerator.h" />
     <ClInclude Include="F_Generators\ExplosionGenerator.h" />
     <ClInclude Include="F_Generators\ForceGenerator.h" />
@@ -295,6 +298,7 @@
     <ClInclude Include="RenderUtils.hpp" />
     <ClInclude Include="Render\Camera.h" />
     <ClInclude Include="Render\Render.h" />
+    <ClInclude Include="Scenes\SceneFloating.h" />
     <ClInclude Include="Scenes\SceneMuelles.h" />
     <ClInclude Include="Scenes\SceneExplosion.h" />
     <ClInclude Include="Scenes\Scene.h" />

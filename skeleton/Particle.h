@@ -10,6 +10,11 @@ public:
 	Particle(Vector3 Pos, Vector3 Vel, 
 		PxGeometryType::Enum geo = PxGeometryType::Enum::eSPHERE,
 		float size = 1, double mass = 1, Vector4 color = Vector4(1,1,1,1));
+	
+	Particle(Vector3 Pos, Vector3 Vel,
+		float sizeX = 1, float sizeY = 1, float sizeZ = 1, 
+		double mass = 1, Vector4 color = Vector4(1, 1, 1, 1));
+	
 	~Particle();
 
 	void integrate(double t);
@@ -31,6 +36,11 @@ public:
 	double getInvMass() { return 1.0 / mass; }
 	double getMass() { return mass; }
 
+	void setRotation(PxQuat newQ) { pose.q = newQ; }
+	PxQuat getRotation() { return pose.q; }
+
+	float getSize() { return size; }
+
 	double timeAlive;
 protected:
 	PxTransform pose;
@@ -41,6 +51,8 @@ protected:
 
 	Vector3 forces;
 	double mass;
+
+	float size;
 
 	double damping = 1;
 };

@@ -19,6 +19,7 @@
 #include "Scenes/SceneWhirlwind.h"
 #include "Scenes/SceneWind.h"
 #include "Scenes/SceneMuelles.h"
+#include "Scenes/SceneFloating.h"
 
 std::string display_text = "This is a test";
 
@@ -131,7 +132,7 @@ void initPhysics(bool interactive)
 
 	// // // // // // // // // 
 
-	currentScene = new SceneMuelles();
+	currentScene = new SceneFloating();
 }
 
 // Function to configure what happens in each step of physics
@@ -209,6 +210,9 @@ void keyPress(unsigned char key, const PxTransform& camera)
 		break;
 	case '4':
 		switchScene(new SceneMuelles());
+		break;
+	case '5':
+		switchScene(new SceneFloating());
 		break;
 	case ' ':
 	{

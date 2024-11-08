@@ -10,6 +10,7 @@ Particle::Particle(Vector3 Pos, Vector3 Vel, PxGeometryType::Enum geoType, float
 	timeAlive = 0;
 
 	this->mass = mass;
+	this->size = size;
 
 	switch (geoType) {
 	case PxGeometryType::Enum::eSPHERE:
@@ -25,6 +26,23 @@ Particle::Particle(Vector3 Pos, Vector3 Vel, PxGeometryType::Enum geoType, float
 		renderItem = new RenderItem(CreateShape(PxSphereGeometry(size)), &pose, color);
 		break;
 	}
+}
+
+Particle::Particle(Vector3 Pos, Vector3 Vel,
+	float sizeX, float sizeY, float sizeZ,
+	double mass, Vector4 color) {
+	pose = PxTransform(Pos);
+
+	vel = Vel;
+	acc = Vector3(0, 0, 0);
+	forces = Vector3(0, 0, 0);
+
+	timeAlive = 0;
+
+	this->mass = mass;
+	this->size = sizeY;
+
+	renderItem = new RenderItem(CreateShape(PxBoxGeometry(sizeX, sizeY, sizeZ)), &pose, color);
 }
 
 Particle::~Particle() {

@@ -37,6 +37,7 @@ SceneMuelles::~SceneMuelles() {
 
 	delete anchor;
 	delete particleAttached;
+	delete slinkyParticles;
 }
 
 void SceneMuelles::Update(float t) {

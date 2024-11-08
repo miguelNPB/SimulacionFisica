@@ -27,6 +27,8 @@
     <ClCompile Include="Scenes\SceneMuelles.cpp" />
     <ClCompile Include="F_Generators\SpringJoinParticles.cpp" />
     <ClCompile Include="F_Generators\SpringAnchorGenerator.cpp" />
+    <ClCompile Include="Scenes\SceneFloating.cpp" />
+    <ClCompile Include="F_Generators\FloatingGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -61,6 +63,8 @@
     <ClInclude Include="Scenes\SceneMuelles.h" />
     <ClInclude Include="F_Generators\SpringJoinParticles.h" />
     <ClInclude Include="F_Generators\SpringAnchorGenerator.h" />
+    <ClInclude Include="Scenes\SceneFloating.h" />
+    <ClInclude Include="F_Generators\FloatingGenerator.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
