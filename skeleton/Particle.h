@@ -54,6 +54,6 @@ protected:
 
 	float size;
 
-	double damping = 1;
+	double damping = 0.99;
 };
 

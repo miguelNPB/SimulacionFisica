@@ -7,9 +7,9 @@ SceneFloating::SceneFloating() {
 
 	floatingSystem = new ParticleSystem(water->getPosition());
 	floatingSystem->AddParticle(new Particle(floatingSystem->getOrigin() + Vector3(0, 0, 0),
-		Vector3(0, 0, 0), physx::PxGeometryType::eSPHERE, 3, 1.5));
+		Vector3(0, 0, 0), physx::PxGeometryType::eSPHERE, 3, 9));
 	floatingSystem->addForceGenerator(new FloatingGenerator(
-		floatingSystem, water->getPosition().y, 1, 100));
+		floatingSystem, water->getPosition().y, 1, 1000));
 	floatingSystem->addForceGenerator(new GravityGenerator(
 		floatingSystem, Vector3(0, -1, 0), GRAVITY));
 }
