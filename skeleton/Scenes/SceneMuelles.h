@@ -14,6 +14,8 @@ public:
 
 	virtual void Update(float t);
 
+	virtual void initScene() {};
+
 	virtual void keyPress(unsigned char key, const PxTransform& camera);
 private:
 	ParticleSystem* anchor;

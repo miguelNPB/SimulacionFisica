@@ -20,7 +20,7 @@
 #include "Scenes/SceneWind.h"
 #include "Scenes/SceneMuelles.h"
 #include "Scenes/SceneFloating.h"
-#include "Scenes/SceneRB.h"
+#include "Scenes/SceneTestRB.h"
 
 std::string display_text = "This is a test";
 
@@ -44,6 +44,7 @@ ContactReportCallback gContactReportCallback;
 /// /// /// 
 
 Scene* currentScene = nullptr;
+bool init = false;
 
 // Initialize physics engine
 void initPhysics(bool interactive)
@@ -71,7 +72,8 @@ void initPhysics(bool interactive)
 
 	// // // // // // // // // 
 
-	currentScene = new SceneRB(gScene, gPhysics);
+	currentScene = new SceneTestRB(gScene, gPhysics);
+	init = true;
 }
 
 // Function to configure what happens in each step of physics
@@ -81,6 +83,10 @@ void stepPhysics(bool interactive, double t)
 {
 	PX_UNUSED(interactive);
 
+	if (init) {
+		currentScene->initScene();
+		init = false;
+	}
 	currentScene->Update(t);
 
 	gScene->simulate(t);
@@ -111,6 +117,8 @@ void cleanupPhysics(bool interactive)
 void switchScene(Scene* newScene) {
 	delete currentScene;
 	currentScene = newScene;
+
+	init = true;
 }
 
 float quaternionToPitch(const PxQuat& q) {

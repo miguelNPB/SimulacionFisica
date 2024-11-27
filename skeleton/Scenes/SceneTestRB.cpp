@@ -3,14 +3,25 @@
 SceneTestRB::SceneTestRB(PxScene* gScene, PxPhysics* gPhysics)
 	: SceneRB(gScene, gPhysics) {
 
-	PxTransform pose = PxTransform(0,0,0);
-	PxRigidStatic* aux = gPhysics->createRigidStatic(pose);
-	PxMaterial* mat = gPhysics->createMaterial(1, 1, 1);
-	PxShape* shape = gPhysics->createShape(PxSphereGeometry(50), *mat);
+	RB_static* stat = new RB_static(this, Vector3(20,50,0), sphere, 5, Vector4(1,1,1,1));
 
-	aux->attachShape(*shape);
 
-	gScene->addActor(*aux);
+	normal = gScene->getPhysics().createMaterial(0.5, 0.5, 0.5);
+	camaElastica = gScene->getPhysics().createMaterial(0.5, 0.5, 1);
+
+	dyn1 = new RB_dynamic(this, Vector3(-20, 50, 0), Vector3(0, 0, 0),
+		3.0, Vector3(0,0,0), sphere, 5.0, Vector4(0, 1, 0, 0), normal);
+
+	dyn2 = new RB_dynamic(this, Vector3(-20, 50, 20), Vector3(0, 0, 0),
+		3.0, Vector3(0, 0, 0), sphere, 5.0, Vector4(1, 0, 0, 0), camaElastica);
+
+
+
+	createGround();
+}
+
+void SceneTestRB::initScene() {
+
 }
 
 SceneTestRB::~SceneTestRB() {

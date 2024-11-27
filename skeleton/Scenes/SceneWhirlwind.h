@@ -12,6 +12,8 @@ public:
 
 	virtual ~SceneWhirlwind();
 
+	virtual void initScene() {};
+
 	virtual void Update(float t);
 private:
 	float whirlwindRadius = 30;

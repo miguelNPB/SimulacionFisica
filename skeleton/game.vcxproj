@@ -264,10 +264,11 @@
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="Proyectile.cpp" />
+    <ClCompile Include="Rigidbody\RB_dynamic.cpp" />
+    <ClCompile Include="Rigidbody\RB_static.cpp" />
     <ClCompile Include="RenderUtils.cpp" />
     <ClCompile Include="Render\Camera.cpp" />
     <ClCompile Include="Render\Render.cpp" />
-    <ClCompile Include="Rigidbody\RigidBody.cpp" />
     <ClCompile Include="Scenes\SceneFloating.cpp" />
     <ClCompile Include="Scenes\SceneMuelles.cpp" />
     <ClCompile Include="Scenes\SceneExplosion.cpp" />
@@ -297,10 +298,12 @@
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="Proyectile.h" />
     <ClInclude Include="ProyectilePool.h" />
+    <ClInclude Include="Rigidbody\RB_dynamic.h" />
+    <ClInclude Include="Rigidbody\RB_static.h" />
     <ClInclude Include="RenderUtils.hpp" />
     <ClInclude Include="Render\Camera.h" />
     <ClInclude Include="Render\Render.h" />
-    <ClInclude Include="Rigidbody\RigidBody.h" />
+    <ClInclude Include="Rigidbody\RB.h" />
     <ClInclude Include="Scenes\SceneRB.h" />
     <ClInclude Include="Scenes\SceneFloating.h" />
     <ClInclude Include="Scenes\SceneMuelles.h" />

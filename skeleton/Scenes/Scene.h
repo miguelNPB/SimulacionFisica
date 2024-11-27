@@ -13,10 +13,12 @@ public:
 
 	virtual void Update(float t) = 0;
 
+	virtual void initScene() = 0;
+
 	virtual void keyPress(unsigned char key, const PxTransform& camera) { }
 
 protected:
-	void createGround() {
+	virtual void createGround() {
 		groundTr = new PxTransform({ 0,0,0 });
 		ground = new RenderItem(CreateShape(PxBoxGeometry(50, 0.1, 50)), groundTr, Vector4(0.2, 0.2, 0.2, 1));
 

@@ -30,7 +30,8 @@
     <ClCompile Include="Scenes\SceneFloating.cpp" />
     <ClCompile Include="F_Generators\FloatingGenerator.cpp" />
     <ClCompile Include="Scenes\SceneTestRB.cpp" />
-    <ClCompile Include="Rigidbody\RigidBody.cpp" />
+    <ClCompile Include="Rigidbody\RB_static.cpp" />
+    <ClCompile Include="Rigidbody\RB_dynamic.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -68,8 +69,10 @@
     <ClInclude Include="Scenes\SceneFloating.h" />
     <ClInclude Include="F_Generators\FloatingGenerator.h" />
     <ClInclude Include="Scenes\SceneTestRB.h" />
-    <ClInclude Include="Rigidbody\RigidBody.h" />
     <ClInclude Include="Scenes\SceneRB.h" />
+    <ClInclude Include="Rigidbody\RB.h" />
+    <ClInclude Include="Rigidbody\RB_static.h" />
+    <ClInclude Include="Rigidbody\RB_dynamic.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

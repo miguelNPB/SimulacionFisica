@@ -13,6 +13,8 @@ public:
 
 	virtual ~SceneWind();
 
+	virtual void initScene() {};
+
 	virtual void Update(float t);
 private:
 	ParticleSystem* partSystem;
