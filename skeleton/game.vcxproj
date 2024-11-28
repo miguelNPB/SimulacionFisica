@@ -264,6 +264,8 @@
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="Proyectile.cpp" />
+    <ClCompile Include="P_Generators\RB_Generator.cpp" />
+    <ClCompile Include="RB_System.cpp" />
     <ClCompile Include="Rigidbody\RB_dynamic.cpp" />
     <ClCompile Include="Rigidbody\RB_static.cpp" />
     <ClCompile Include="RenderUtils.cpp" />
@@ -287,9 +289,9 @@
     <ClInclude Include="constants.h" />
     <ClInclude Include="core.hpp" />
     <ClInclude Include="F_Generators\FloatingGenerator.h" />
-    <ClInclude Include="P_Generators\CustomParticleGenerator.h" />
     <ClInclude Include="F_Generators\ExplosionGenerator.h" />
     <ClInclude Include="F_Generators\ForceGenerator.h" />
+    <ClInclude Include="F_Generators\RB_ForceGenerator.h" />
     <ClInclude Include="P_Generators\GeneratorNormal.h" />
     <ClInclude Include="P_Generators\GeneratorUniforme.h" />
     <ClInclude Include="F_Generators\GravityGenerator.h" />
@@ -298,6 +300,8 @@
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="Proyectile.h" />
     <ClInclude Include="ProyectilePool.h" />
+    <ClInclude Include="P_Generators\RB_Generator.h" />
+    <ClInclude Include="RB_System.h" />
     <ClInclude Include="Rigidbody\RB_dynamic.h" />
     <ClInclude Include="Rigidbody\RB_static.h" />
     <ClInclude Include="RenderUtils.hpp" />

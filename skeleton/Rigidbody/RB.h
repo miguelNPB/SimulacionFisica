@@ -1,16 +1,23 @@
 #pragma once
 #include "../RenderUtils.hpp"
+#include <chrono>
 
 using namespace physx;
+
+using TimePoint = std::chrono::time_point<std::chrono::high_resolution_clock>;
 
 enum ShapeType { cube, sphere };
 
 class RB {
 public:
 	RB() {
-
+		time = std::chrono::high_resolution_clock::now();
 	}
+
+	const TimePoint getStartTime() { return time; }
 protected:
+	TimePoint time;
+
 	PxShape* GenerateShape(ShapeType shape, Vector3 size, PxMaterial* mat = nullptr) {
 		PxShape* geom;
 

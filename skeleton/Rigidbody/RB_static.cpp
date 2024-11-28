@@ -1,6 +1,7 @@
 #include "RB_static.h"
 
-RB_static::RB_static(SceneRB* scene, const Vector3& initPos, ShapeType shape, Vector3 size, Vector4 color) {
+RB_static::RB_static(SceneRB* scene, const Vector3& initPos, ShapeType shape, Vector3 size, Vector4 color) 
+	: RB(){
 	this->scene = scene;
 
 	pos = PxTransform(initPos.x, initPos.y, initPos.z);

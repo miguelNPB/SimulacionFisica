@@ -32,6 +32,8 @@
     <ClCompile Include="Scenes\SceneTestRB.cpp" />
     <ClCompile Include="Rigidbody\RB_static.cpp" />
     <ClCompile Include="Rigidbody\RB_dynamic.cpp" />
+    <ClCompile Include="P_Generators\RB_Generator.cpp" />
+    <ClCompile Include="RB_System.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -56,7 +58,6 @@
     <ClInclude Include="F_Generators\ForceGenerator.h" />
     <ClInclude Include="F_Generators\GravityGenerator.h" />
     <ClInclude Include="F_Generators\WindGenerator.h" />
-    <ClInclude Include="P_Generators\CustomParticleGenerator.h" />
     <ClInclude Include="F_Generators\WhirlwindGenerator.h" />
     <ClInclude Include="F_Generators\ExplosionGenerator.h" />
     <ClInclude Include="Scenes\Scene.h" />
@@ -73,6 +74,9 @@
     <ClInclude Include="Rigidbody\RB.h" />
     <ClInclude Include="Rigidbody\RB_static.h" />
     <ClInclude Include="Rigidbody\RB_dynamic.h" />
+    <ClInclude Include="P_Generators\RB_Generator.h" />
+    <ClInclude Include="RB_System.h" />
+    <ClInclude Include="F_Generators\RB_ForceGenerator.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

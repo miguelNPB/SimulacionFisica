@@ -14,6 +14,8 @@ public:
 
 	virtual void Update(float t) override;
 private:
+	RB_System* globalSystem;
+
 	PxMaterial* normal;
 	PxMaterial* camaElastica;
 
