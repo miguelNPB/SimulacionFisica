@@ -264,7 +264,8 @@
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="Proyectile.cpp" />
-    <ClCompile Include="P_Generators\RB_Generator.cpp" />
+    <ClCompile Include="F_Generators\RB_WindGenerator.cpp" />
+    <ClCompile Include="Rigidbody\RB_Generator.cpp" />
     <ClCompile Include="RB_System.cpp" />
     <ClCompile Include="Rigidbody\RB_dynamic.cpp" />
     <ClCompile Include="Rigidbody\RB_static.cpp" />
@@ -300,7 +301,8 @@
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="Proyectile.h" />
     <ClInclude Include="ProyectilePool.h" />
-    <ClInclude Include="P_Generators\RB_Generator.h" />
+    <ClInclude Include="F_Generators\RB_WindGenerator.h" />
+    <ClInclude Include="Rigidbody\RB_Generator.h" />
     <ClInclude Include="RB_System.h" />
     <ClInclude Include="Rigidbody\RB_dynamic.h" />
     <ClInclude Include="Rigidbody\RB_static.h" />

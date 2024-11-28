@@ -10,7 +10,9 @@ public:
 		RB_static(scene, initPos, shape, Vector3(size, size, size), color);
 	}
 
-	PxRigidStatic* getRigidBody() { return rigid; }
+	virtual PxRigidDynamic* getRigidBody() { return nullptr; }
+
+	//PxRigidStatic* getRigidBody() { return rigid; }
 private:
 	PxRigidStatic* rigid;
 

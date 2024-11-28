@@ -6,20 +6,19 @@ class RB_dynamic : public RB
 {
 public:
 	RB_dynamic(SceneRB* scene, const Vector3& initPos, 
-		const Vector3& vel, double mass, const Vector3& inertia, 
+		const Vector3& vel, double mass, 
 		ShapeType shape, const Vector3& size, const Vector4& color,
 		PxMaterial* mat);
 
 	RB_dynamic(SceneRB* scene, const Vector3& initPos,
-		const Vector3& vel, double mass, const Vector3& inertia,
+		const Vector3& vel, double mass,
 		ShapeType shape, float size, const Vector4& color,
-		PxMaterial* mat) 
-	{
-		RB_dynamic(scene, initPos,vel, mass, inertia, shape, Vector3(size, size, size), color, mat);
-	}
+		PxMaterial* mat);
 
-	PxRigidDynamic* getRigidBody() { return rigid; }
+	virtual PxRigidDynamic* getRigidBody() { return rigid; }
+
+	int a = 0;
 private:
-	PxRigidDynamic* rigid = nullptr;
+	PxRigidDynamic* rigid;
 	SceneRB* scene;
 };

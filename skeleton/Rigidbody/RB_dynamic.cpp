@@ -1,7 +1,7 @@
 #include "RB_dynamic.h"
 
 RB_dynamic::RB_dynamic(SceneRB* scene, const Vector3& initPos = Vector3(0, 0, 0),
-	const Vector3& vel = Vector3(0,0,0), double mass = 1, const Vector3& inertia = Vector3(0, 0, 0),
+	const Vector3& vel = Vector3(0,0,0), double mass = 1,
 	ShapeType shapeType = sphere, const Vector3& size = Vector3(1, 1, 1), const Vector4& color = Vector4(1, 1, 1, 1),
 	PxMaterial* mat = nullptr) 
 		: RB() {
@@ -17,7 +17,27 @@ RB_dynamic::RB_dynamic(SceneRB* scene, const Vector3& initPos = Vector3(0, 0, 0)
 	rigid->setLinearVelocity(vel);
 	rigid->setAngularVelocity({ 0,0,0 });
 	rigid->setMass(mass);
-	rigid->setMassSpaceInertiaTensor(inertia);
 
-	PxRigidBodyExt::updateMassAndInertia(*rigid, 0.15);
+	//PxRigidBodyExt::updateMassAndInertia(*rigid, 0.15);
+}
+
+RB_dynamic::RB_dynamic(SceneRB* scene, const Vector3& initPos = Vector3(0, 0, 0),
+	const Vector3& vel = Vector3(0, 0, 0), double mass = 1,
+	ShapeType shapeType = sphere, float size = 1, const Vector4& color = Vector4(1, 1, 1, 1),
+	PxMaterial* mat = nullptr)
+	: RB() {
+
+	this->rigid = scene->get_gPhysics()->createRigidDynamic(PxTransform(initPos));
+
+	PxShape* shape = RB::GenerateShape(shapeType, Vector3(size,size,size), mat);
+	rigid->attachShape(*shape);
+	scene->get_gScene()->addActor(*rigid);
+
+	RenderItem* item = new RenderItem(shape, rigid, color);
+
+	rigid->setLinearVelocity(vel);
+	rigid->setAngularVelocity({ 0,0,0 });
+	rigid->setMass(mass);
+
+	//PxRigidBodyExt::updateMassAndInertia(*rigid, 0.15);
 }

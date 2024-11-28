@@ -3,6 +3,8 @@
 #include <functional>
 #include <memory>
 
+class RB_ForceGenerator;
+
 class RB_System
 {
 public:
@@ -19,17 +21,17 @@ public:
 
 	void addRB(std::shared_ptr<RB> rb);
 
-	void addForceGenerator();
+	void addForceGenerator(RB_ForceGenerator* gen);
 
 	std::vector<std::shared_ptr<RB>> getPool() { return pool; }
 private:
 	void killAllRB();
-	void updateFGenerators();
+	void updateFGenerators(float t);
 
 	Vector3 origin;
 
 	std::vector<std::shared_ptr<RB>> pool;
-	//std::vector<Force_RB_Generator*> fgen;
+	std::vector<RB_ForceGenerator*> fgen;
 	std::function<bool(RB*)> destroyCondition;
 };
 
