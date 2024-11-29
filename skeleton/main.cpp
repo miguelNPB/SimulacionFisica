@@ -22,6 +22,8 @@
 #include "Scenes/SceneFloating.h"
 #include "Scenes/SceneTestRB.h"
 
+#include "Scenes/Level1.h"
+
 std::string display_text = "This is a test";
 
 using namespace physx;
@@ -45,6 +47,8 @@ ContactReportCallback gContactReportCallback;
 
 Scene* currentScene = nullptr;
 bool init = false;
+
+RenderItem* camFollowObject = nullptr;
 
 // Initialize physics engine
 void initPhysics(bool interactive)
@@ -72,7 +76,7 @@ void initPhysics(bool interactive)
 
 	// // // // // // // // // 
 
-	currentScene = new SceneTestRB(gScene, gPhysics);
+	currentScene = new Level1(gScene, gPhysics, GetCamera());
 	init = true;
 }
 
@@ -180,7 +184,6 @@ void onCollision(physx::PxActor* actor1, physx::PxActor* actor2)
 	PX_UNUSED(actor1);
 	PX_UNUSED(actor2);
 }
-
 
 int main(int, const char*const*)
 {

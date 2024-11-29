@@ -48,7 +48,12 @@ public:
 	physx::PxVec3		getEye()	const;
 	physx::PxVec3		getDir()	const;
 	physx::PxTransform	getTransform() const;
+
+	void setPos(const physx::PxVec3& newPos);
+	void lookAt(const physx::PxTransform& tr);
 private:
+	
+
 	physx::PxVec3	mEye;
 	physx::PxVec3	mDir;
 	int				mMouseX;

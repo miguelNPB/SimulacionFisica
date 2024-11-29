@@ -5,19 +5,14 @@
 class RB_dynamic : public RB
 {
 public:
-	RB_dynamic(SceneRB* scene, const Vector3& initPos, 
-		const Vector3& vel, double mass, 
-		ShapeType shape, const Vector3& size, const Vector4& color,
-		PxMaterial* mat);
+	RB_dynamic(SceneRB* scene, const Vector3& initPos = Vector3(0, 0, 0),
+		const Vector3& vel = Vector3(0, 0, 0), double mass = 1,
+		ShapeType shapeType = sphere, const Vector3& size = Vector3(1, 1, 1), const Vector4& color = Vector4(1, 1, 1, 1),
+		PxMaterial* mat = nullptr);
 
-	RB_dynamic(SceneRB* scene, const Vector3& initPos,
-		const Vector3& vel, double mass,
-		ShapeType shape, float size, const Vector4& color,
-		PxMaterial* mat);
+	physx::PxTransform getPos() { return rigid->getGlobalPose(); }
 
 	virtual PxRigidDynamic* getRigidBody() { return rigid; }
-
-	int a = 0;
 private:
 	PxRigidDynamic* rigid;
 	SceneRB* scene;
