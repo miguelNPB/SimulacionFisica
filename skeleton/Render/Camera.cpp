@@ -28,7 +28,7 @@ namespace Snippets
 
 		if (state == 1 && (button == 0 || button == 1))
 			glutWarpPointer(500, 500);
-		std::cout << state << " " << button << "\n";
+		//std::cout << state << " " << button << "\n";
 	}
 
 	bool Camera::handleKey(unsigned char key, int x, int y, float speed)
@@ -138,6 +138,8 @@ namespace Snippets
 
 		// Actualizar la posición de la cámara para mantener el radio de órbita
 		mEye = lookingAt + cameraToTarget * FOV;
+
+		mEye.y = INCLINATION;
 
 		// Actualizar la dirección de la cámara para que siga mirando al objeto
 		mDir = (lookingAt - mEye).getNormalized();

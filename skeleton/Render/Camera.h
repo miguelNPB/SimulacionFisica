@@ -60,7 +60,8 @@ private:
 	int				mMouseX;
 	int				mMouseY;
 
-	float FOV = 20;
+	float FOV = 40;
+	float INCLINATION = 8;
 };
 
 

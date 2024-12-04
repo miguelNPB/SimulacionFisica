@@ -35,6 +35,8 @@ public:
 	
 	virtual void initScene() {};
 
+	virtual void onCollision(physx::PxActor* actor1, physx::PxActor* actor2) override {};
+
 	void addGenerator(RB_Generator* gen) {
 		generators.push_back(gen);
 	}

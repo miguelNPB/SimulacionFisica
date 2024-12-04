@@ -17,6 +17,7 @@ public:
 
 	virtual void keyPress(unsigned char key) { }
 
+	virtual void onCollision(physx::PxActor* actor1, physx::PxActor* actor2) {}
 protected:
 	virtual void createGround() {
 		groundTr = new PxTransform({ 0,0,0 });
