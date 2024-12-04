@@ -146,7 +146,7 @@ void keyPress(unsigned char key, const PxTransform& camera)
 {
 	PX_UNUSED(camera);
 
-	currentScene->keyPress(toupper(key), camera);
+	currentScene->keyPress(toupper(key));
 
 	switch(toupper(key))
 	{

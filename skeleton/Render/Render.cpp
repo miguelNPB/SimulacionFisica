@@ -258,6 +258,29 @@ void setupDefaultWindow(const char *name)
 	delete[] namestr;
 }
 
+void setupGameWindow() {
+	const char* name = "Proyecto Final Miguel Perez";
+
+	char* namestr = new char[strlen(name) + 1];
+	strcpy(namestr, name);
+	int argc = 1;
+	char* argv[1] = { namestr };
+
+	glutInit(&argc, argv);
+
+
+	glutInitWindowSize(800, 800);
+	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
+	int mainHandle = glutCreateWindow(name);
+	glutSetWindow(mainHandle);
+	glutReshapeFunc(reshapeCallback);
+
+	glutSetCursor(GLUT_CURSOR_NONE);
+	glutWarpPointer(256, 256);
+
+	delete[] namestr;
+}
+
 void setupDefaultRenderState()
 {
 	// Setup default render states

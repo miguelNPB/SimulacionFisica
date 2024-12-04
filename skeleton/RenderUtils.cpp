@@ -4,6 +4,7 @@
 
 #include "core.hpp"
 #include "RenderUtils.hpp"
+#include <iostream>
 
 
 using namespace physx;
@@ -57,8 +58,10 @@ void keyboardCallback(unsigned char key, int x, int y)
 	if(key==27)
 		exit(0);
 
-	if(!sCamera->handleKey(key, x, y))
-		keyPress(key, sCamera->getTransform());
+	//if (!sCamera->handleKey(key, x, y))
+	keyPress(key, PxTransform(0, 0, 0));
+
+	//keyPress(key, sCamera->getTransform());
 }
 
 void mouseCallback(int button, int state, int x, int y)
@@ -139,7 +142,8 @@ void renderLoop()
 	StartCounter();
 	sCamera = new Camera(PxVec3(50.0f, 50.0f, 50.0f), PxVec3(-0.6f,-0.2f,-0.7f));
 
-	setupDefaultWindow("Simulacion Fisica Videojuegos");
+	//setupDefaultWindow("Simulacion Fisica Videojuegos");
+	setupGameWindow();
 	setupDefaultRenderState();
 
 	glutIdleFunc(idleCallback);

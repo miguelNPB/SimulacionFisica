@@ -51,13 +51,16 @@ public:
 
 	void setPos(const physx::PxVec3& newPos);
 	void lookAt(const physx::PxTransform& tr);
+	void updateFollow(const physx::PxTransform& tr);
 private:
-	
+	physx::PxTransform lookingAtTransform;
 
 	physx::PxVec3	mEye;
 	physx::PxVec3	mDir;
 	int				mMouseX;
 	int				mMouseY;
+
+	float FOV = 20;
 };
 
 

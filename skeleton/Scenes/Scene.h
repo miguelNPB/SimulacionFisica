@@ -15,7 +15,7 @@ public:
 
 	virtual void initScene() = 0;
 
-	virtual void keyPress(unsigned char key, const PxTransform& camera) { }
+	virtual void keyPress(unsigned char key) { }
 
 protected:
 	virtual void createGround() {

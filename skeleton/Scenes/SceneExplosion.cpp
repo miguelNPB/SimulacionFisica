@@ -31,7 +31,7 @@ void SceneExplosion::Update(float t) {
 	partSystem->update(t);
 }
 
-void SceneExplosion::keyPress(unsigned char key, const PxTransform& camera) {
+void SceneExplosion::keyPress(unsigned char key) {
 
 	switch (key) {
 		case 'F':

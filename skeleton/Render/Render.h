@@ -52,6 +52,7 @@ extern std::string display_text;
 namespace Snippets
 {
 void setupDefaultWindow(const char* name);
+void setupGameWindow();
 void setupDefaultRenderState();
 
 void startRender(const physx::PxVec3& cameraEye, const physx::PxVec3& cameraDir, physx::PxReal nearClip = 1.f, physx::PxReal farClip = 10000.f);

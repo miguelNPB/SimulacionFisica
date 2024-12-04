@@ -13,6 +13,8 @@ public:
 	virtual void initScene() override;
 
 	virtual void Update(float t) override;
+
+	virtual void keyPress(unsigned char key) override;
 private:
 	void CameraMovement();
 
@@ -20,8 +22,8 @@ private:
 
 	RB_dynamic* player;
 
+	RB_static* floor;
+
 	RB_System* globalSystem;
-
-
 };
 

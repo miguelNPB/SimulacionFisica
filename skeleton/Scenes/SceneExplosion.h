@@ -16,7 +16,7 @@ public:
 
 	virtual void Update(float t);
 
-	virtual void keyPress(unsigned char key, const PxTransform& camera);
+	virtual void keyPress(unsigned char key);
 private:
 	ParticleSystem* partSystem = nullptr;
 	ExplosionGenerator* explosion = nullptr;
