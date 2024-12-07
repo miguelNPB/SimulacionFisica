@@ -9,7 +9,10 @@ public:
 		std::function<Particle*()> func);
 
 	void spawnParticle() override;
+
+	void toggleActive() { active = !active; }
 private:
+	bool active;
 	ParticleSystem* sysRef;
 	std::function<Particle*()> func;
 };

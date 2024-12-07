@@ -4,10 +4,13 @@ CustomParticleGenerator::CustomParticleGenerator(ParticleSystem* sysRef, double 
 	: ParticleGenerator(spawnDelay) {
 	this->func = func;
 	this->sysRef = sysRef;
+	this->active = true;
 }
 
 void CustomParticleGenerator::spawnParticle() {
-	Particle* p = func();
+	if (active) {
+		Particle* p = func();
 
-	sysRef->AddParticle(p);
+		sysRef->AddParticle(p);
+	}
 }

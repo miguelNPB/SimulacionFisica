@@ -2,6 +2,7 @@
 #include "SceneRB.h"
 #include "../Rigidbody/RB_static.h"
 #include "../Rigidbody/RB_dynamic.h"
+#include "../P_Generators/CustomParticleGenerator.h"
 
 using namespace physx;
 
@@ -23,6 +24,7 @@ public:
 	virtual void keyPress(unsigned char key) override;
 private:
 	void makeLevel();
+	void createParticleGenerators();
 
 	void killPlayer();
 
@@ -30,7 +32,10 @@ private:
 	Camera* cam;
 
 	RB_dynamic* player;
+	float speed = 200;
 
+	ParticleSystem* lavaAnimSystem;
+	CustomParticleGenerator* lavaAnimGenerator;
 	std::chrono::steady_clock::time_point killTimer;
 	std::chrono::steady_clock::time_point killTimerEnd;
 	const int KILL_ANIM_TIME = 2000;
@@ -40,12 +45,14 @@ private:
 	RB_static* deathFloor;
 	RB_static* goal;
 	RB_static* spawn;
+
 	RB_System* globalSystem;
 
 	Vector3 spawnPoint = Vector3(0, 3, 0);
 
 	Vector4 DEATH_COLOR = Vector4(1, 0, 0, 1);
 	Vector4 FLOOR_COLOR = Vector4(0, 0, 1, 1);
+	Vector4 WALL_COLOR = Vector4(0, 0, 0.7, 1);
 	Vector4 SPAWN_COLOR = Vector4(0.5, 0.5, 0.5, 1);
 	Vector4 GOAL_COLOR = Vector4(0, 1, 0, 1);
 };

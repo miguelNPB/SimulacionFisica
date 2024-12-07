@@ -1,0 +1,20 @@
+﻿  Level1.cpp
+C:\Users\migue\OneDrive\Escritorio\Trabajos\Tercero GDV\SIM\SimulacionFisica\common\PhysX-3.4\PxShared\include\task\PxTask.h(329,1): warning C5220: "physx::PxLightCpuTask::mRefCount": un miembro de datos no estático con un tipo calificado volátil ya no implica
+           que los constructores de copia/movimiento generados por el compilador y los operadores de asignación de copia o movimiento no sean triviales
+C:\Users\migue\OneDrive\Escritorio\Trabajos\Tercero GDV\SIM\SimulacionFisica\common\PhysX-3.4\PxShared\include\task\PxTask.h(326): message : vea la declaración de 'physx::PxLightCpuTask::mRefCount'
+C:\Users\migue\OneDrive\Escritorio\Trabajos\Tercero GDV\SIM\SimulacionFisica\skeleton\Scenes\Scene.h(18,38): warning C4100: 'key': parámetro formal sin referencia
+C:\Users\migue\OneDrive\Escritorio\Trabajos\Tercero GDV\SIM\SimulacionFisica\skeleton\Scenes\Scene.h(20,67): warning C4100: 'actor2': parámetro formal sin referencia
+C:\Users\migue\OneDrive\Escritorio\Trabajos\Tercero GDV\SIM\SimulacionFisica\skeleton\Scenes\Scene.h(20,43): warning C4100: 'actor1': parámetro formal sin referencia
+C:\Users\migue\OneDrive\Escritorio\Trabajos\Tercero GDV\SIM\SimulacionFisica\skeleton\Rigidbody\RB.h(43,1): warning C5204: "RB": la clase tiene funciones virtuales, pero su destructor trivial no es virtual; puede que las instancias de objetos derivados de esta clase no se destruyan correctamente
+C:\Users\migue\OneDrive\Escritorio\Trabajos\Tercero GDV\SIM\SimulacionFisica\skeleton\Scenes\SceneRB.h(25,15): warning C4189: 'item': la variable local se ha inicializado pero no se hace referencia a ella
+C:\Users\migue\OneDrive\Escritorio\Trabajos\Tercero GDV\SIM\SimulacionFisica\skeleton\Scenes\SceneRB.h(38,67): warning C4100: 'actor2': parámetro formal sin referencia
+C:\Users\migue\OneDrive\Escritorio\Trabajos\Tercero GDV\SIM\SimulacionFisica\skeleton\Scenes\SceneRB.h(38,43): warning C4100: 'actor1': parámetro formal sin referencia
+C:\Users\migue\OneDrive\Escritorio\Trabajos\Tercero GDV\SIM\SimulacionFisica\skeleton\Rigidbody\RB_static.h(21,1): warning C5204: "RB_static": la clase tiene funciones virtuales, pero su destructor trivial no es virtual; puede que las instancias de objetos derivados de esta clase no se destruyan correctamente
+C:\Users\migue\OneDrive\Escritorio\Trabajos\Tercero GDV\SIM\SimulacionFisica\skeleton\Rigidbody\RB_dynamic.h(19,1): warning C5204: "RB_dynamic": la clase tiene funciones virtuales, pero su destructor trivial no es virtual; puede que las instancias de objetos derivados de esta clase no se destruyan correctamente
+C:\Users\migue\OneDrive\Escritorio\Trabajos\Tercero GDV\SIM\SimulacionFisica\skeleton\P_Generators\ParticleGenerator.h(29,1): warning C5204: "ParticleGenerator": la clase tiene funciones virtuales, pero su destructor trivial no es virtual; puede que las instancias de objetos derivados de esta clase no se destruyan correctamente
+C:\Users\migue\OneDrive\Escritorio\Trabajos\Tercero GDV\SIM\SimulacionFisica\skeleton\P_Generators\CustomParticleGenerator.h(18,1): warning C4265: "CustomParticleGenerator": la clase tiene funciones virtuales, pero su destructor no trivial no es virtual; puede que las instancias de esta clase no se destruyan correctamente
+C:\Users\migue\OneDrive\Escritorio\Trabajos\Tercero GDV\SIM\SimulacionFisica\skeleton\Scenes\Level1.h(55,1): warning C4626: 'Level1': el operador de asignaciones se definió implícitamente como eliminado
+C:\Users\migue\OneDrive\Escritorio\Trabajos\Tercero GDV\SIM\SimulacionFisica\skeleton\Scenes\Level1.cpp(36,13): warning C4189: 'level1': la variable local se ha inicializado pero no se hace referencia a ella
+C:\Users\migue\OneDrive\Escritorio\Trabajos\Tercero GDV\SIM\SimulacionFisica\skeleton\Scenes\Level1.cpp(139,5): warning C4130: '==': operación lógica en dirección de una constante de cadena
+C:\Users\migue\OneDrive\Escritorio\Trabajos\Tercero GDV\SIM\SimulacionFisica\skeleton\Scenes\Level1.cpp(140,1): warning C4130: '==': operación lógica en dirección de una constante de cadena
+  game.vcxproj -> C:\Users\migue\OneDrive\Escritorio\Trabajos\Tercero GDV\SIM\SimulacionFisica\bin\gameCHECKED.exe

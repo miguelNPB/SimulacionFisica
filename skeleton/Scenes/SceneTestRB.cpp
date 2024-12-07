@@ -5,7 +5,7 @@
 SceneTestRB::SceneTestRB(PxScene* gScene, PxPhysics* gPhysics)
 	: SceneRB(gScene, gPhysics) {
 
-	RB_static* stat = new RB_static(this, "stat", Vector3(20, 50, 0), sphere, 5, Vector4(1, 1, 1, 1));
+	//RB_static* stat = new RB_static(this, "stat", Vector3(20, 50, 0), sphere, 5, Vector4(1, 1, 1, 1));
 
 
 	normal = gScene->getPhysics().createMaterial(0.5, 0.5, 0.5);
