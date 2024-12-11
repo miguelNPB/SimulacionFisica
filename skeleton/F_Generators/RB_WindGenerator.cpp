@@ -8,9 +8,11 @@ RB_WindGenerator::RB_WindGenerator(RB_System* sysRef, Vector3 pos,
 	this->direction = direction;
 
 
-	PxShape* shape = CreateShape(PxSphereGeometry(radius));
 	tr = new PxTransform(pos);
+#ifdef DEBUG
+	PxShape* shape = CreateShape(PxSphereGeometry(radius));
 	RenderItem* item = new RenderItem(shape, tr, color);
+#endif
 }
 
 void RB_WindGenerator::applyForce(std::shared_ptr<RB> rb) {

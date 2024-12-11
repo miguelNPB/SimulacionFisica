@@ -255,6 +255,8 @@
   <ItemGroup>
     <ClCompile Include="callbacks.cpp" />
     <ClCompile Include="F_Generators\FloatingGenerator.cpp" />
+    <ClCompile Include="F_Generators\RB_SpringAnchorGenerator.cpp" />
+    <ClCompile Include="F_Generators\RB_WhirlWind.cpp" />
     <ClCompile Include="Scenes\Level1.cpp" />
     <ClCompile Include="P_Generators\CustomParticleGenerator.cpp" />
     <ClCompile Include="F_Generators\ExplosionGenerator.cpp" />
@@ -294,6 +296,8 @@
     <ClInclude Include="F_Generators\ExplosionGenerator.h" />
     <ClInclude Include="F_Generators\ForceGenerator.h" />
     <ClInclude Include="F_Generators\RB_ForceGenerator.h" />
+    <ClInclude Include="F_Generators\RB_SpringAnchorGenerator.h" />
+    <ClInclude Include="F_Generators\RB_WhirlWind.h" />
     <ClInclude Include="Scenes\Level1.h" />
     <ClInclude Include="P_Generators\GeneratorNormal.h" />
     <ClInclude Include="P_Generators\GeneratorUniforme.h" />

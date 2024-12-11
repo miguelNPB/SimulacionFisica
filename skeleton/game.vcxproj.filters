@@ -36,6 +36,8 @@
     <ClCompile Include="RB_System.cpp" />
     <ClCompile Include="F_Generators\RB_WindGenerator.cpp" />
     <ClCompile Include="Scenes\Level1.cpp" />
+    <ClCompile Include="F_Generators\RB_SpringAnchorGenerator.cpp" />
+    <ClCompile Include="F_Generators\RB_WhirlWind.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -81,6 +83,8 @@
     <ClInclude Include="F_Generators\RB_ForceGenerator.h" />
     <ClInclude Include="F_Generators\RB_WindGenerator.h" />
     <ClInclude Include="Scenes\Level1.h" />
+    <ClInclude Include="F_Generators\RB_SpringAnchorGenerator.h" />
+    <ClInclude Include="F_Generators\RB_WhirlWind.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">
