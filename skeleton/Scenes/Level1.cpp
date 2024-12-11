@@ -2,16 +2,26 @@
 #include <iostream>
 #include <chrono>
 #include <random>
+#include "../SceneManager.h"
+#include "YouWin.h"
 
-Level1::Level1(PxScene* gScene, PxPhysics* gPhysics, Camera* cam) 
-	: SceneRB(gScene, gPhysics), cam(cam){
+Level1::Level1(SceneManager* sceneManager, PxScene* gScene, PxPhysics* gPhysics, Camera* cam)
+	: SceneRB(gScene, gPhysics), cam(cam), sceneManager(sceneManager){
 	
 	
 }
 
 Level1::~Level1() {
+	global_system->killAllRB();
+	player_system->killAllRB();
+	muelle1_system->killAllRB();
+	muelle2_system->killAllRB();
+	player = nullptr;
 
-	
+	delete lava_system;
+	delete death_anim_system;
+	delete viento1_psys;
+	delete whirlwind_psys;
 }
 
 void Level1::initScene() {
@@ -104,6 +114,10 @@ void Level1::onCollision(physx::PxActor* actor1, physx::PxActor* actor2) {
 			death_anim_generator->toggleActive();
 		}
 	}
+	else if ((actor1->getName() == "player" && actor2->getName() == "goal") ||
+		(actor2->getName() == "player" && actor1->getName() == "goal")) {
+		goToWinScreen();
+	}
 }
 
 void Level1::CameraMovement() {
@@ -153,7 +167,7 @@ void Level1::initViento() {
 
 	// FORCEGENERATOR
 	viento1_rbfgen = new RB_WindGenerator(player_system, viento1_pos, Vector3(-1,0,0),
-		viento1_radius,5);
+		viento1_radius, viento1_strength);
 	player_system->addForceGenerator(viento1_rbfgen);
 }
 
@@ -305,21 +319,21 @@ void Level1::initWhirlwind() {
 }
 
 void Level1::makeLevel() {
-	death_floor = new RB_static(this, "death", Vector3(0, -10, 0), cube, Vector3(500, 1, 500), DEATH_COLOR);
-	goal = new RB_static(this, "goal", Vector3(0, 0, 130), cube, Vector3(5, 100, 5), GOAL_COLOR);
-	spawn = new RB_static(this, "spawn", Vector3(0, -9, 0), cube, Vector3(5, 10, 5), SPAWN_COLOR);
+	global_system->addRB(std::make_shared<RB_static>(this, "death", Vector3(0, -10, 0), cube, Vector3(500, 1, 500), DEATH_COLOR));
+	global_system->addRB(std::make_shared<RB_static>(this, "goal", Vector3(0, 0, 130), cube, Vector3(5, 100, 5), GOAL_COLOR));
+	global_system->addRB(std::make_shared<RB_static>(this, "spawn", Vector3(0, -9, 0), cube, Vector3(5, 10, 5), SPAWN_COLOR));
+
+	global_system->addRB(std::make_shared<RB_static>(this, "floor1", Vector3(0, 0, 20), cube, Vector3(2, 1, 15), FLOOR_COLOR));
+	global_system->addRB(std::make_shared<RB_static>(this, "floor2", Vector3(0, 0, 35), cube, Vector3(10, 1, 2), FLOOR_COLOR));
+	global_system->addRB(std::make_shared<RB_static>(this, "wall1", Vector3(0, 3, 38), cube, Vector3(10, 3, 1), WALL_COLOR));
 	
-	RB_static* level1 = new RB_static(this, "floor1", Vector3(0, 0, 20), cube, Vector3(2, 1, 15), FLOOR_COLOR);
-	RB_static* level2 = new RB_static(this, "floor2", Vector3(0, 0, 35), cube, Vector3(10, 1, 2), FLOOR_COLOR);
-	RB_static* level3 = new RB_static(this, "wall1", Vector3(0, 3, 38), cube, Vector3(10, 3, 1), WALL_COLOR);
+	global_system->addRB(std::make_shared<RB_static>(this, "floor3_izq", Vector3(-12, 0, 43), cube, Vector3(2, 1, 10), FLOOR_COLOR));
+	global_system->addRB(std::make_shared<RB_static>(this, "floor4_der", Vector3(12, 0, 43), cube, Vector3(2, 1, 10), FLOOR_COLOR));
+	global_system->addRB(std::make_shared<RB_static>(this, "floor5", Vector3(0, 0, 51), cube, Vector3(10, 1, 2), FLOOR_COLOR));
 	
-	RB_static* level4 = new RB_static(this, "floor3_izq", Vector3(-12, 0, 43), cube, Vector3(2, 1, 10), FLOOR_COLOR);
-	RB_static* level5 = new RB_static(this, "floor4_der", Vector3(12, 0, 43), cube, Vector3(2, 1, 10), FLOOR_COLOR);
-	RB_static* level6 = new RB_static(this, "floor5", Vector3(0, 0, 51), cube, Vector3(10, 1, 2), FLOOR_COLOR);
-	
-	RB_static* level7 = new RB_static(this, "floor6", Vector3(0, 0, 66), cube, Vector3(2, 1, 15), FLOOR_COLOR);
-	RB_static* level8 = new RB_static(this, "floor7", Vector3(0, 0, 95), cube, Vector3(14, 1, 14), FLOOR_COLOR);
-	RB_static* level9 = new RB_static(this, "floor8", Vector3(0, 0, 118), cube, Vector3(2, 1, 10), FLOOR_COLOR);
+	global_system->addRB(std::make_shared<RB_static>(this, "floor6", Vector3(0, 0, 66), cube, Vector3(2, 1, 15), FLOOR_COLOR));
+	global_system->addRB(std::make_shared<RB_static>(this, "floor7", Vector3(0, 0, 95), cube, Vector3(14, 1, 14), FLOOR_COLOR));
+	global_system->addRB(std::make_shared<RB_static>(this, "floor8", Vector3(0, 0, 118), cube, Vector3(2, 1, 10), FLOOR_COLOR));
 }
 
 void Level1::killPlayer() {
@@ -330,4 +344,8 @@ void Level1::killPlayer() {
 	player->getRigidBody()->setAngularVelocity(Vector3(0, 0, 0));
 	cam->setPos(player->getPos().p + Vector3(0, 0, -10));
 	cam->lookAt(player->getRigidBody()->getGlobalPose());
+}
+
+void Level1::goToWinScreen() {
+	sceneManager->switchScene(new YouWin(sceneManager, gScene, gPhysics, cam));
 }

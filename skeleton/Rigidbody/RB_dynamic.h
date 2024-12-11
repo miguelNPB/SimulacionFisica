@@ -10,10 +10,15 @@ public:
 		ShapeType shapeType = sphere, const Vector3& size = Vector3(1, 1, 1), const Vector4& color = Vector4(1, 1, 1, 1),
 		PxMaterial* mat = nullptr);
 
+	virtual ~RB_dynamic();
+
 	physx::PxTransform getPos() { return rigid->getGlobalPose(); }
 
 	virtual PxRigidDynamic* getRigidBody() { return rigid; }
+
+	virtual PxRigidActor* getActor() { return rigid; }
 private:
+	RenderItem* item;
 	PxRigidDynamic* rigid;
 	SceneRB* scene;
 };

@@ -13,6 +13,7 @@
 #include <iostream>
 //#include "CheckML.h"
 
+#include "SceneManager.h"
 #include "Scenes/Scene.h"
 
 #include "Scenes/SceneExplosion.h"
@@ -22,7 +23,7 @@
 #include "Scenes/SceneFloating.h"
 #include "Scenes/SceneTestRB.h"
 
-#include "Scenes/Level1.h"
+#include "Scenes/MainMenu.h"
 
 std::string display_text = "This is a test";
 
@@ -45,10 +46,7 @@ ContactReportCallback gContactReportCallback;
 
 /// /// /// 
 
-Scene* currentScene = nullptr;
-bool init = false;
-
-RenderItem* camFollowObject = nullptr;
+SceneManager* sceneManager;
 
 // Initialize physics engine
 void initPhysics(bool interactive)
@@ -76,8 +74,8 @@ void initPhysics(bool interactive)
 
 	// // // // // // // // // 
 
-	currentScene = new Level1(gScene, gPhysics, GetCamera());
-	init = true;
+	sceneManager = new SceneManager();
+	sceneManager->initSceneManager(new MainMenu(sceneManager, gScene, gPhysics, GetCamera()));
 }
 
 // Function to configure what happens in each step of physics
@@ -86,13 +84,9 @@ void initPhysics(bool interactive)
 void stepPhysics(bool interactive, double t)
 {
 	PX_UNUSED(interactive);
-
-	if (init) {
-		currentScene->initScene();
-		init = false;
-	}
-	currentScene->Update(t);
-
+	
+	sceneManager->Update(t);
+	
 	gScene->simulate(t);
 	gScene->fetchResults(true);
 }
@@ -107,7 +101,7 @@ void cleanupPhysics(bool interactive)
 	gScene->release();
 	gDispatcher->release();
 
-	delete currentScene;
+	delete sceneManager;
 
 	// -----------------------------------------------------
 	gPhysics->release();	
@@ -118,12 +112,7 @@ void cleanupPhysics(bool interactive)
 	gFoundation->release();
 }
 
-void switchScene(Scene* newScene) {
-	delete currentScene;
-	currentScene = newScene;
 
-	init = true;
-}
 
 float quaternionToPitch(const PxQuat& q) {
 	// q = (w, x, y, z)
@@ -146,10 +135,11 @@ void keyPress(unsigned char key, const PxTransform& camera)
 {
 	PX_UNUSED(camera);
 
-	currentScene->keyPress(toupper(key));
+	sceneManager->keyPress(toupper(key));
 
 	switch(toupper(key))
 	{
+	/*
 	case '1':
 		switchScene(new SceneRB(gScene, gPhysics));
 		break;
@@ -168,6 +158,7 @@ void keyPress(unsigned char key, const PxTransform& camera)
 	case '9':
 		switchScene(new SceneFloating());
 		break;
+	*/
 	case ' ':
 	{
 		break;
@@ -181,7 +172,7 @@ void keyPress(unsigned char key, const PxTransform& camera)
 
 void onCollision(physx::PxActor* actor1, physx::PxActor* actor2)
 {
-	currentScene->onCollision(actor1, actor2);
+	sceneManager->onCollision(actor1, actor2);
 }
 
 int main(int, const char*const*)

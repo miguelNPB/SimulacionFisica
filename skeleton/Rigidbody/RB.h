@@ -14,7 +14,11 @@ public:
 		time = std::chrono::high_resolution_clock::now();
 	}
 
+	virtual ~RB() {}
+
 	virtual PxRigidDynamic* getRigidBody() = 0;
+
+	virtual PxRigidActor* getActor() = 0;
 
 	const TimePoint getStartTime() { return time; }
 protected:

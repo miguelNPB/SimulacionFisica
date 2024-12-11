@@ -24,8 +24,9 @@ public:
 	void addForceGenerator(RB_ForceGenerator* gen);
 
 	std::vector<std::shared_ptr<RB>> getPool() { return pool; }
-private:
+	
 	void killAllRB();
+private:
 	void updateFGenerators(float t);
 
 	Vector3 origin;

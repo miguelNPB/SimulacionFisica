@@ -38,6 +38,9 @@
     <ClCompile Include="Scenes\Level1.cpp" />
     <ClCompile Include="F_Generators\RB_SpringAnchorGenerator.cpp" />
     <ClCompile Include="F_Generators\RB_WhirlWind.cpp" />
+    <ClCompile Include="Scenes\MainMenu.cpp" />
+    <ClCompile Include="Scenes\YouWin.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core.hpp" />
@@ -85,6 +88,9 @@
     <ClInclude Include="Scenes\Level1.h" />
     <ClInclude Include="F_Generators\RB_SpringAnchorGenerator.h" />
     <ClInclude Include="F_Generators\RB_WhirlWind.h" />
+    <ClInclude Include="Scenes\MainMenu.h" />
+    <ClInclude Include="Scenes\YouWin.h" />
+    <ClInclude Include="SceneManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Render">

@@ -257,6 +257,8 @@
     <ClCompile Include="F_Generators\FloatingGenerator.cpp" />
     <ClCompile Include="F_Generators\RB_SpringAnchorGenerator.cpp" />
     <ClCompile Include="F_Generators\RB_WhirlWind.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="Scenes\MainMenu.cpp" />
     <ClCompile Include="Scenes\Level1.cpp" />
     <ClCompile Include="P_Generators\CustomParticleGenerator.cpp" />
     <ClCompile Include="F_Generators\ExplosionGenerator.cpp" />
@@ -286,6 +288,7 @@
     <ClCompile Include="Vector3D.cpp" />
     <ClCompile Include="F_Generators\WhirlwindGenerator.cpp" />
     <ClCompile Include="F_Generators\WindGenerator.cpp" />
+    <ClCompile Include="Scenes\YouWin.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="callbacks.hpp" />
@@ -298,6 +301,8 @@
     <ClInclude Include="F_Generators\RB_ForceGenerator.h" />
     <ClInclude Include="F_Generators\RB_SpringAnchorGenerator.h" />
     <ClInclude Include="F_Generators\RB_WhirlWind.h" />
+    <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="Scenes\MainMenu.h" />
     <ClInclude Include="Scenes\Level1.h" />
     <ClInclude Include="P_Generators\GeneratorNormal.h" />
     <ClInclude Include="P_Generators\GeneratorUniforme.h" />
@@ -329,6 +334,7 @@
     <ClInclude Include="Vector3D.h" />
     <ClInclude Include="F_Generators\WhirlwindGenerator.h" />
     <ClInclude Include="F_Generators\WindGenerator.h" />
+    <ClInclude Include="Scenes\YouWin.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

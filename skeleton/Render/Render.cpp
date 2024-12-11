@@ -310,8 +310,8 @@ void startRender(const PxVec3& cameraEye, const PxVec3& cameraDir, PxReal clipNe
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	// Display text
-	glColor4f(1.0f, 0.2f, 0.2f, 1.0f);
-	drawText(display_text, 0, 0);
+	//glColor4f(1.0f, 0.2f, 0.2f, 1.0f);
+	//drawText(display_text, 0, 0);
 
 	// Setup camera
 	glMatrixMode(GL_PROJECTION);
@@ -405,8 +405,9 @@ void finishRender()
 	glutSwapBuffers();
 }
 
-void drawText(const std::string& text, int x, int y)
+void drawText(const std::string& text, int x, int y, float sizeX, float sizeY, const physx::PxVec3& color)
 {
+
 	glMatrixMode(GL_PROJECTION);
 	double* matrix = new double[16];
 	glGetDoublev(GL_PROJECTION_MATRIX, matrix);
@@ -416,17 +417,25 @@ void drawText(const std::string& text, int x, int y)
 	glLoadIdentity();
 	glPushMatrix();
 	//glLoadIdentity();
+
+	glColor3f(color.x, color.y, color.z); // Cambiar el color del texto
+	glTranslatef(x, y, 0); // Trasladar al lugar deseado
+	glScalef(sizeX, sizeY, 1.0f); // Escalar el texto
 	glRasterPos2i(x, y);
 
 	int length = text.length();
 
+	glDisable(GL_LIGHTING);
+
 	for (int i = 0; i < length; i++) {
-		glutBitmapCharacter(GLUT_BITMAP_9_BY_15, (int)text[i]);
+		glutStrokeCharacter(GLUT_STROKE_ROMAN, text[i]);
 	}
 	glPopMatrix();
 	glMatrixMode(GL_PROJECTION);
 	glLoadMatrixd(matrix);
 	glMatrixMode(GL_MODELVIEW);
+
+	glEnable(GL_LIGHTING);
 }
 
 

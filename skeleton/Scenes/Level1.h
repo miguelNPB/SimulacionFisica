@@ -12,10 +12,13 @@
 
 using namespace physx;
 
+class SceneManager;
+class YouWin;
+
 class Level1 : public SceneRB
 {
 public:
-	Level1(PxScene* gScene, PxPhysics* gPhysics, Camera* cam);
+	Level1(SceneManager* sceneManager, PxScene* gScene, PxPhysics* gPhysics, Camera* cam);
 
 	~Level1();
 
@@ -38,6 +41,8 @@ private:
 
 	void killPlayer();
 
+	void goToWinScreen();
+
 	Camera* cam;
 
 	std::shared_ptr<RB_dynamic> player;
@@ -57,6 +62,7 @@ private:
 	bool start_kill_timer = false;
 
 	// VIENTO
+	float viento1_strength = 7;
 	Vector3 viento1_pos = Vector3(0,0,20);
 	float viento1_radius = 10;
 	RB_WindGenerator* viento1_rbfgen;
@@ -81,17 +87,12 @@ private:
 	RB_System* global_system;
 	RB_System* player_system;
 
-	// PLATAFORMAS CLAVE NIVEL
-	RB_static* death_floor;
-	RB_static* goal;
-	RB_static* spawn;
-
 	// DELAY ENTRE ACTUALIZACIÓN DE FUERZA DEL PLAYER
 	const float PLAYER_FORCE_INTERVAL = 0.1f;
 	std::chrono::steady_clock::time_point lastForceUpdate;
 
 	// SPAWNPOINT
-	Vector3 spawnPoint = Vector3(0, 3, 84);
+	Vector3 spawnPoint = Vector3(0, 3, 0);
 
 	// COLORES
 	Vector4 DEATH_COLOR = Vector4(1, 0, 0, 1);
@@ -99,5 +100,7 @@ private:
 	Vector4 WALL_COLOR = Vector4(0, 0, 0.7, 1);
 	Vector4 SPAWN_COLOR = Vector4(0.5, 0.5, 0.5, 1);
 	Vector4 GOAL_COLOR = Vector4(0, 1, 0, 1);
+
+	SceneManager* sceneManager;
 };
 

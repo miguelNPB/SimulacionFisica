@@ -13,11 +13,15 @@ RB_dynamic::RB_dynamic(SceneRB* scene, const char* name, const Vector3& initPos,
 	rigid->attachShape(*shape);
 	scene->get_gScene()->addActor(*rigid);
 
-	RenderItem* item = new RenderItem(shape, rigid, color);
+	item = new RenderItem(shape, rigid, color);
 
 	rigid->setLinearVelocity(vel);
 	rigid->setAngularVelocity({ 0,0,0 });
 	rigid->setMass(mass);
 
 	//PxRigidBodyExt::updateMassAndInertia(*rigid, 0.15);
+}
+
+RB_dynamic::~RB_dynamic() {
+	DeregisterRenderItem(item);
 }

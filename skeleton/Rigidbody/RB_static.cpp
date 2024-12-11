@@ -12,5 +12,9 @@ RB_static::RB_static(SceneRB* scene, const char* name, const Vector3& initPos, S
 	rigid->attachShape(*geo);
 	scene->get_gScene()->addActor(*rigid);
 
-	RenderItem* item = new RenderItem(geo, rigid, color);
+	item = new RenderItem(geo, rigid, color);
+}
+
+RB_static::~RB_static() {
+	DeregisterRenderItem(item);
 }
