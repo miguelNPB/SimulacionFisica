@@ -15,7 +15,18 @@ public:
 	};
 
 	virtual ~SceneRB() {
+		for (auto sys : rb_systems) {
+			sys->killAllRB();
+		}
+		rb_systems.clear();
 
+		for (auto sys : p_systems) {
+			delete sys;
+		}
+		p_systems.clear();
+
+		rb_generators.clear();
+		p_generators.clear();
 	}
 
 	virtual void createGround() override {

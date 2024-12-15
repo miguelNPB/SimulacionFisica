@@ -12,16 +12,7 @@ Level1::Level1(SceneManager* sceneManager, PxScene* gScene, PxPhysics* gPhysics,
 }
 
 Level1::~Level1() {
-	global_system->killAllRB();
-	player_system->killAllRB();
-	muelle1_system->killAllRB();
-	muelle2_system->killAllRB();
 	player = nullptr;
-
-	delete lava_system;
-	delete death_anim_system;
-	delete viento1_psys;
-	delete whirlwind_psys;
 }
 
 void Level1::initScene() {
@@ -81,7 +72,6 @@ void Level1::keyPress(unsigned char key) {
 	
 	Vector3 cam_dir = cam->getDir();
 	cam_dir.normalize();
-	//std::cout << "X:" << cam_dir.x << " Y:" << cam_dir.y << " Z:" << cam_dir.z << "\n";
 
 	Vector3 totalForce = Vector3(0, 0, 0);
 	// FORWARD BACKWARD MOVEMENT
@@ -98,7 +88,8 @@ void Level1::keyPress(unsigned char key) {
 
 
 	if (!totalForce.isZero()) {
-		totalForce.normalize(); // Normalizar para que siempre se mueva a la misma velocidad
+		// Normalizar para que siempre se mueva a la misma velocidad
+		totalForce.normalize(); 
 		player->getRigidBody()->addForce(totalForce * speed);
 	}
 

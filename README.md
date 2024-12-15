@@ -1,8 +1,15 @@
-# SimulacionFisicaVideojuegos
-Repositorio de las prácticas de la asignatura de Simulación Física de Videojuegos
+# PROYECTO FINAL MIGUEL NORBERTO PÉREZ BALLESTER
 
-En la carpeta skeleton estará vuestro código fuente
+### Descripción breve
+Mi juego trata sobre una bola que debe recorrer un nivel suspendido sobre un charco de lava
+para llegar a la pared verde, que es la meta.\
+Si la bola se cae a la lava, morirá y volverá aparecer en el punto de origen.\
+Entre los obstáculos tenemos la racha de viento que empuja a la bola, dos cubos que actúan como muelles que si tocan
+al jugador morirá y finalmente un remolino que empuja al jugador fuera de la plataforma. 
+### Controles
 
-Necesitaréis además descomprimir el archivo que se indica a continuación en la raíz del repositorio:
-
-Carpetas bin y common https://ucomplutense-my.sharepoint.com/:f:/g/personal/liagar05_ucm_es/ElNxHPmZVj9Ni9-8FKTKp7cBJHAarnL3vvEvG50z0QMrzg
+-`W` ir hacia adelante\
+-`S` ir hacia atrás\
+-`A` ir hacia la izquierda\
+-`D` ir hacia la derecha\
+-`Click izquierdo y arrastrar` mover la cámara

@@ -17,14 +17,13 @@ RB_WhirlWind::RB_WhirlWind(RB_System* sysRef, Vector3 origin, float radius, floa
 
 void RB_WhirlWind::applyForce(std::shared_ptr<RB> rb) {
 
-	if ((rb->getRigidBody()->getGlobalPose().p - origin).magnitudeSquared() > radius * radius)
-		return;
+	if ((rb->getRigidBody()->getGlobalPose().p - origin).magnitudeSquared() < radius * radius)
+	{
+		Vector3 whirlwindVel = strength * Vector3(
+			-(rb->getRigidBody()->getGlobalPose().p.z - origin.z),
+			height - (rb->getRigidBody()->getGlobalPose().p.y - origin.y),
+			rb->getRigidBody()->getGlobalPose().p.x - origin.x);
 
-	Vector3 whirlwindVel = strength * Vector3(
-		-(rb->getRigidBody()->getGlobalPose().p.z - origin.z),
-		height - (rb->getRigidBody()->getGlobalPose().p.y - origin.y),
-		rb->getRigidBody()->getGlobalPose().p.x - origin.x);
-
-	rb->getRigidBody()->addForce(whirlwindVel);
-
+		rb->getRigidBody()->addForce(whirlwindVel);
+	}
 }
